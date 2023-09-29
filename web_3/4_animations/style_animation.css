@@ -180,7 +180,7 @@ body{
   margin: auto;
   width: 400px;
   height: 400px;
-  background: url("media/svg/sheet4.svg");
+  background: url("../../media/svg/sheet4.svg");
   animation: play 0.5s steps(4) infinite;
 }
 
