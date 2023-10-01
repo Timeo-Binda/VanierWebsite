@@ -4,95 +4,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css"> <!-- Assurez-vous de créer un fichier styles.css pour le CSS -->
-    <title>Portfolio</title>
+    <link rel="stylesheet" href="style_portfolio_master.css">
+    <link rel="stylesheet" href="style_portfolio_divers.css">
+    <title>Timeo's Portfolio</title>
 </head>
 
 <body>
-    <nav>
-        <div class="logo">
-            <img src="votre-logo.png" alt="Logo">
-        </div>
-        <div class="menu">
-            <ul>
-                <li><a href="#creations">Créations</a></li>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="video-bg">
-        <video autoplay muted loop>
-            <source src="votre-video.mp4" type="video/mp4">
-            Votre navigateur ne prend pas en charge la lecture de vidéos HTML5.
-        </video>
-    </div>
-    <nav>
-    </nav>
-    <div class="content">
-        <h1>Portfolio</h1>
-        <h2>Timéo BINDA</h2>
-    </div>
-        <section id="creations">
-            <nav class="creations-nav">
-                <ul>
-                    <li><a href="#photos">Photos</a></li>
-                    <li><a href="#videos">Vidéos</a></li>
-                    <li><a href="#design">Design</a></li>
-                    <li><a href="#devweb">Dev Web</a></li>
+    <header>
+            <video autoplay loop muted id="bgVideo">
+                <source src="../../media/videos/arctic_monkeys.mp4" type="video/mp4">
+                <!-- Ajoutez d'autres sources vidéo pour une compatibilité multi-navigateurs si nécessaire -->
+            </video>
+        <div class="nav">
+            <input type="checkbox" id="nav-check">
+            <div class="nav-header">
+                <div class="nav-title">
+                    <div class="logo">
+                        <img src="../../media/svg/Logo_tb.svg" alt="Logo" class="logo">
+                    </div>
+                </div>
+            </div>
+            <div class="nav-btn">
+                <label for="nav-check">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+            </div>
+
+            <div class="nav-links">
+                <ul class="snip1189">
+                    <li><a href="#creations">Creations</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
-            </nav>
-    
-            <div id="photos" class="creations-section">
-                <h3>Photos</h3>
-                <div class="creations-gallery">
-                    <a href="#"><img src="image1.jpg" alt="Image 1"></a>
-                    <a href="#"><img src="image2.jpg" alt="Image 2"></a>
-                    <a href="#"><img src="image3.jpg" alt="Image 3"></a>
-                    <a href="#"><img src="image4.jpg" alt="Image 4"></a>
+            </div>
+        </div>
+
+        </div>
+        <div class="content">
+            <h1>Timéo BINDA</h1>
+        <a href="#creations"><img src="../../media/svg/scroll_down.svg" alt="scroll arrow" class="scroll"></a>
+        </div>
+
+    </header>
+    <section id="creations">
+        <nav class="creations-nav">
+            <ul>
+                <li><a href="#photos">Photos</a></li>
+                <li><a href="#videos">Vidéos</a></li>
+                <li><a href="#design">Design</a></li>
+                <li><a href="#devweb">Dev Web</a></li>
+            </ul>
+        </nav>
+
+        <div id="photos" class="creations-section">
+            <h3>Photos</h3>
+            <div class="creations-gallery">
+
+                <p>ceci est la section photo</p>
+                <a href="#"><img src="image1.jpg" alt="Image 1"></a>
+                <a href="#"><img src="image2.jpg" alt="Image 2"></a>
+                <a href="#"><img src="image3.jpg" alt="Image 3"></a>
+                <a href="#"><img src="image4.jpg" alt="Image 4"></a>
+            </div>
+        </div>
+
+        <div id="videos" class="creations-section">
+            <h3>Videos</h3>
+            <div class="creations-gallery">
+                <p>ceci est la section video</p>
+                <div class="video-player">
+                    <!-- Insérez ici votre code pour le premier lecteur vidéo -->
+                </div>
+                <div class="video-player">
+                    <!-- Insérez ici votre code pour le deuxième lecteur vidéo -->
+                </div>
+                <div class="video-player">
+                    <!-- Insérez ici votre code pour le troisième lecteur vidéo -->
                 </div>
             </div>
-    
-            <div id="videos" class="creations-section">
-                <h3>Videos</h3>
-                <div class="creations-gallery">
-                    <div class="video-player">
-                        <!-- Insérez ici votre code pour le premier lecteur vidéo -->
-                    </div>
-                    <div class="video-player">
-                        <!-- Insérez ici votre code pour le deuxième lecteur vidéo -->
-                    </div>
-                    <div class="video-player">
-                        <!-- Insérez ici votre code pour le troisième lecteur vidéo -->
-                    </div>
-                </div>
+        </div>
+
+        <div id="design" class="creations-section">
+            <h3>Design</h3>
+            <div class="creations-gallery">
+                <a href="#"><img src="design1.jpg" alt="Design 1"></a>
+                <a href="#"><img src="design2.jpg" alt="Design 2"></a>
+                <a href="#"><img src="design3.jpg" alt="Design 3"></a>
+                <a href="#"><img src="design4.jpg" alt="Design 4"></a>
             </div>
-    
-            <div id="design" class="creations-section">
-                <h3>Design</h3>
-                <div class="creations-gallery">
-                    <a href="#"><img src="design1.jpg" alt="Design 1"></a>
-                    <a href="#"><img src="design2.jpg" alt="Design 2"></a>
-                    <a href="#"><img src="design3.jpg" alt="Design 3"></a>
-                    <a href="#"><img src="design4.jpg" alt="Design 4"></a>
-                </div>
+        </div>
+
+        <div id="devweb" class="creations-section">
+            <h3>Dev Web</h3>
+            <div class="creations-gallery">
+                <a href="#"><img src="devweb1.jpg" alt="Dev Web 1"></a>
+                <a href="#"><img src="devweb2.jpg" alt="Dev Web 2"></a>
+                <a href="#"><img src="devweb3.jpg" alt="Dev Web 3"></a>
+                <a href="#"><img src="devweb4.jpg" alt="Dev Web 4"></a>
             </div>
-    
-            <div id="devweb" class="creations-section">
-                <h3>Dev Web</h3>
-                <div class="creations-gallery">
-                    <a href="#"><img src="devweb1.jpg" alt="Dev Web 1"></a>
-                    <a href="#"><img src="devweb2.jpg" alt="Dev Web 2"></a>
-                    <a href="#"><img src="devweb3.jpg" alt="Dev Web 3"></a>
-                    <a href="#"><img src="devweb4.jpg" alt="Dev Web 4"></a>
-                </div>
-            </div>
-        </section>
+        </div>
+    </section>
 
     <section id="about">
         <h3>About me</h3>
         <img src="" alt="">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolor laborum, quae perspiciatis assumenda, aperiam illo, eveniet unde neque animi in distinctio vel velit inventore? Nam qui blanditiis reiciendis at!.</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum dolor laborum, quae perspiciatis assumenda,
+            aperiam illo, eveniet unde neque animi in distinctio vel velit inventore? Nam qui blanditiis reiciendis at!.
+        </p>
     </section>
 
     <section id="contact">
@@ -117,8 +137,39 @@
         </div>
     </section>
 
-<p>lkzjdlfk</p>
-<p>sdfs</p>
+    <p>lkzjdlfk</p>
+    <p>sdfs</p>
 </body>
 
 </html>
+
+
+
+<script>
+    // Récupérez les éléments de la navigation et les sections
+        const creationsNav = document.querySelector('.creations-nav ul');
+        const creationsSections = document.querySelectorAll('.creations-section');
+
+        // Écoutez les clics sur les liens de la navigation
+        creationsNav.addEventListener('click', function (e) {
+            e.preventDefault(); // Empêche le comportement par défaut du lien
+
+            // Vérifiez si l'élément cliqué est un lien
+            if (e.target.tagName === 'A') {
+                // Récupérez l'ID de la section cible
+                const targetSectionId = e.target.getAttribute('href').substring(1);
+
+                // Parcourez toutes les sections et masquez-les
+                creationsSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Affichez la section cible
+                const targetSection = document.getElementById(targetSectionId);
+                if (targetSection) {
+                    targetSection.style.display = 'block';
+                }
+            }
+        });
+
+</script>
