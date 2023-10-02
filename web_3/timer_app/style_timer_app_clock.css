@@ -4,7 +4,7 @@ body {
     background-color: #E4EBF5;
 }
 
-.clock {
+  .clock {
   margin-inline: auto;
   margin-top: 10%;  
   grid-column: 2 / 3;
@@ -18,7 +18,11 @@ body {
   justify-content: center;
   align-items: center;
   position: relative;
+  scale: 2;
 }
+
+
+
 
 .clock .hour-hand, .clock .minute-hand, .clock .second-hand {
   position: absolute;
@@ -110,4 +114,11 @@ body {
   left: 98%;
   -webkit-transform: translateX(-0.6rem);
           transform: translateX(-0.6rem);
+}
+
+
+@media screen and (max-width: 900px) {
+  .clock {
+    scale: 1;
+  }
 }

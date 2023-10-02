@@ -33,9 +33,17 @@
 
         <!-- THANKS FOR READING THE CODE! YOU ARE AWSOME! -->
 
-        <header>
-            <h1>Timer App Sample</h1>
-        </header>
+
+
+
+
+
+        <!-- Yes i am awsome!  -->
+
+
+
+
+
 
         <nav>
 
@@ -87,9 +95,11 @@
 
             <section>
                 <div class="clock">
-                    <div class="hour-hand" id="svg_h"></div>
-                    <div class="minute-hand" id="svg_m"></div>
-                    <div class="second-hand" id="svg_s"></div>
+                    <div class="needles">
+                        <div class="hour-hand" id="svg_h"></div>
+                        <div class="minute-hand" id="svg_m"></div>
+                        <div class="second-hand" id="svg_s"></div>
+                    </div>
                     <div class="point"></div>
                     <div class="marker">
                         <span class="marker__1"></span>
@@ -103,11 +113,10 @@
         </article>
 
         <article id="countdown">
-            <h2>Countdown Timer</h2>
             <section id="down_form">
                 <form action="">
-                    <input type="number" name="down_m" id="down_m" value="0"> :
-                    <input type="number" name="down_s" id="down_s" value="10">
+                    <input type="number" name="down_m" id="down_m" value="0" readonly> :
+                    <input type="number" name="down_s" id="down_s" value="10" readonly>
                 </form>
                 <div class="buttons_group">
                     <button id="down_start">Start</button>
@@ -121,7 +130,6 @@
 
 
         <article id="stopwatch">
-            <h2>Stop watch</h2>
             <section id="watch_form">
                 <form action="">
                     <input class="stopwatch_minutes" type="number" name="watch_m" id="watch_m" value="0" readonly> :
@@ -148,7 +156,7 @@
         let clockF = async function () {
             try {
                 // Fetch the current time from the WorldTimeAPI
-                let response = await fetch('http://worldtimeapi.org/api/timezone/Europe/Paris');
+                let response = await fetch('http://worldtimeapi.org/api/timezone/america/toronto');
                 let data = await response.json();
 
                 // Extract hours, minutes, and seconds from the API response
@@ -156,15 +164,20 @@
                 let m = parseInt(data.datetime.slice(14, 16));
                 let s = parseInt(data.datetime.slice(17, 19));
 
+                h = h > 12 ? h - 12 : h;
+
+                console.log(h, m, s);
+
                 // Calculate the rotation angles for the clock hands
                 let sDeg = (s / 60) * 360;
                 let mDeg = ((m + s / 60) / 60) * 360;
                 let hDeg = ((h + m / 60) / 12) * 360;
 
                 // Apply rotations to the clock hands
-                document.getElementById("svg_s").style.transform = "rotate(" + sDeg + "deg)";
-                document.getElementById("svg_m").style.transform = "rotate(" + mDeg + "deg)";
-                document.getElementById("svg_h").style.transform = "rotate(" + hDeg + "deg)";
+                document.getElementById("svg_s").style.transform = "rotate(" + (sDeg + 180) + "deg)";
+                document.getElementById("svg_m").style.transform = "rotate(" + (mDeg + 180) + "deg)";
+                document.getElementById("svg_h").style.transform = "rotate(" + (hDeg + 180) + "deg)";
+
             } catch (error) {
                 console.error("Error fetching the time:", error);
             }

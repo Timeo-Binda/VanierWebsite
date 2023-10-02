@@ -6,6 +6,7 @@ form {
   border: none;
   background: none;
   font-size: 3rem;
+      margin-top: 5%;
 }
 
 form input {
@@ -19,6 +20,3 @@ form input {
 }
 
 
-.stopwatch_secondes{
-    margin-left:1em;
-}
