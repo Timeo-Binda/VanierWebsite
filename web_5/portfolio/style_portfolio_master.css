@@ -1,13 +1,12 @@
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
-body{
-    margin: 0;
-    padding: 0;
-    font-family: lato, sans-serif;
+body {
+  margin: 0;
+  padding: 0;
+  font-family: lato, sans-serif;
 }
-
 
 .nav {
   height: 100%;
@@ -52,7 +51,7 @@ body{
   display: none;
 }
 
-@media (max-width:600px) {
+@media (max-width: 600px) {
   .nav > .nav-btn {
     display: inline-block;
     position: absolute;
@@ -65,7 +64,8 @@ body{
     height: 50px;
     padding: 13px;
   }
-  .nav > .nav-btn > label:hover,.nav  #nav-check:checked ~ .nav-btn > label {
+  .nav > .nav-btn > label:hover,
+  .nav #nav-check:checked ~ .nav-btn > label {
     background-color: rgba(0, 0, 0, 0.3);
   }
   .nav > .nav-btn > label > span {
@@ -98,9 +98,8 @@ body{
   }
 }
 
-
 .snip1189 {
-  font-family: 'Raleway', Arial, sans-serif;
+  font-family: "Raleway", Arial, sans-serif;
   text-align: center;
   text-transform: uppercase;
   font-weight: 500;
@@ -130,7 +129,7 @@ body{
   height: 14px;
   width: 14px;
   position: absolute;
-  content: '';
+  content: "";
   -webkit-transition: all 0.35s ease;
   transition: all 0.35s ease;
   opacity: 0;
@@ -164,85 +163,70 @@ body{
   opacity: 1;
 }
 
-
-
-
-header>.content>h1{
-    font-size: 50px;
-    color: #fff;
-    text-align: center;
-    margin-top: 100px;
-    font-family: lato, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+header > .content > h1 {
+  font-size: 50px;
+  color: #fff;
+  text-align: center;
+  margin-top: 100px;
+  font-family: lato, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header {
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 30%;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 30%;
 }
 
 #bgVideo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1; /* Assurez-vous que la vidéo est en arrière-plan */
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1; /* Assurez-vous que la vidéo est en arrière-plan */
 }
 
 /* Le reste de votre CSS pour le contenu du header */
 
-
-
 /* Masquez toutes les sections sauf la section "Vidéos" par défaut */
 .creations-section {
-    display: none;
+  display: none;
 }
 
 #videos {
-    display: block;
+  display: block;
 }
-
-
-
 
 /* Style du fond de la barre de navigation */
 .creations-nav {
-    background-color: #161616;
-    padding: 15px 0; /* Espacement intérieur pour l'espacement des éléments */
-    text-align: center; /* Centre les éléments horizontalement */
+  background-color: #161616;
+  padding: 15px 0; /* Espacement intérieur pour l'espacement des éléments */
+  text-align: center; /* Centre les éléments horizontalement */
 }
 
 /* Style des éléments de navigation */
 .creations-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .creations-nav li {
-    display: inline-block; /* Affiche les éléments en ligne */
-    margin: 0 15px; /* Espacement entre les éléments */
+  display: inline-block; /* Affiche les éléments en ligne */
+  margin: 0 15px; /* Espacement entre les éléments */
 }
 
 .creations-nav a {
-    text-decoration: none;
-    color: white; /* Couleur du texte en blanc */
-    font-size: 18px; /* Taille de la police */
-    font-weight: normal; /* Police avec un poids normal (non gras) */
+  text-decoration: none;
+  color: white; /* Couleur du texte en blanc */
+  font-size: 18px; /* Taille de la police */
+  font-weight: normal; /* Police avec un poids normal (non gras) */
 }
-
-
-
-
-
-
-
-
-
-
-
-

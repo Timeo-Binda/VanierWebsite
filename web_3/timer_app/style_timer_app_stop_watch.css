@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 3rem;
+}
+
+form input {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: inherit;
+  width: 2em;
+}
+
+
+.stopwatch_secondes{
+    margin-left:1em;
+}

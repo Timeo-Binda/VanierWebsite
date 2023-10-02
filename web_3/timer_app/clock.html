@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style_clock.css">
+    <link rel="stylesheet" href="style_timer_app_buttons.css">
+    <link rel="stylesheet" href="style_timer_app_clock.css">
+    <link rel="stylesheet" href="style_timer_app_stop_watch.css">
     <title>Timer App Sample</title>
 
     <style>
@@ -36,9 +38,26 @@
         </header>
 
         <nav>
-            <button id="nav_clock">Clock</button>
-            <button id="nav_down">Countdown Timer</button>
-            <button id="nav_watch">Stop Watch</button>
+
+            <div class="segmented-control">
+
+                <input type="radio" name="radio2" value="3" id="tab-1" checked />
+                <label id="nav_clock" for="tab-1" class="segmented-control__1">
+                    <p>Clock</p>
+                </label>
+
+                <input type="radio" name="radio2" value="4" id="tab-2" />
+                <label id="nav_down" for="tab-2" class="segmented-control__2">
+                    <p>Countdown</p>
+                </label>
+
+                <input type="radio" name="radio2" value="5" id="tab-3" />
+                <label id="nav_watch" for="tab-3" class="segmented-control__3">
+                    <p>Timer</p>
+                </label>
+
+                <div class="segmented-control__color"></div>
+            </div>
         </nav>
 
         <article id="clock">
@@ -71,6 +90,13 @@
                     <div class="hour-hand" id="svg_h"></div>
                     <div class="minute-hand" id="svg_m"></div>
                     <div class="second-hand" id="svg_s"></div>
+                    <div class="point"></div>
+                    <div class="marker">
+                        <span class="marker__1"></span>
+                        <span class="marker__2"></span>
+                        <span class="marker__3"></span>
+                        <span class="marker__4"></span>
+                    </div>
                 </div>
             </section>
 
@@ -83,24 +109,29 @@
                     <input type="number" name="down_m" id="down_m" value="0"> :
                     <input type="number" name="down_s" id="down_s" value="10">
                 </form>
-                <button id="down_start">Start</button>
-                <button id="down_stop">Stop</button>
+                <div class="buttons_group">
+                    <button id="down_start">Start</button>
+                    <button id="down_stop">Stop</button>
+                </div>
             </section>
         </article>
+
+
+
+
 
         <article id="stopwatch">
             <h2>Stop watch</h2>
             <section id="watch_form">
                 <form action="">
-                    <input type="number" name="watch_m" id="watch_m" value="0"> :
-                    <input type="number" name="watch_s" id="watch_s" value="0">
+                    <input class="stopwatch_minutes" type="number" name="watch_m" id="watch_m" value="0" readonly> :
+                    <input class="stopwatch_secondes" type="number" name="watch_s" id="watch_s" value="0" readonly>
                 </form>
-                <div class="icon__home">
-                    <ion-icon name="home"></ion-icon>
+                <div class="buttons_group">
+                    <button id="watch_start">Start</button>
+                    <button id="watch_stop">Pause</button>
+                    <button id="watch_reset">Reset</button>
                 </div>
-                <button id="watch_start">Start</button>
-                <button id="watch_stop">Pause</button>
-                <button id="watch_reset">Reset</button>
             </section>
         </article>
 
