@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style_portfolio_master.css">
     <link rel="stylesheet" href="style_portfolio_divers.css">
+    <link rel="stylesheet" href="style_portfolio_videos.css">
     <title>Timeo's Portfolio</title>
 </head>
 
 <body>
     <header>
-            <video autoplay loop muted id="bgVideo">
-                <source src="../../media/videos/arctic_monkeys.mp4" type="video/mp4">
-                <!-- Ajoutez d'autres sources vidéo pour une compatibilité multi-navigateurs si nécessaire -->
-            </video>
+        <video autoplay loop muted id="bgVideo">
+            <source src="../../media/videos/arctic_monkeys.mp4" type="video/mp4">
+            <!-- Ajoutez d'autres sources vidéo pour une compatibilité multi-navigateurs si nécessaire -->
+        </video>
         <div class="nav">
             <input type="checkbox" id="nav-check">
             <div class="nav-header">
@@ -44,7 +45,7 @@
         </div>
         <div class="content">
             <h1>Timéo BINDA</h1>
-        <a href="#creations"><img src="../../media/svg/scroll_down.svg" alt="scroll arrow" class="scroll"></a>
+            <a href="#creations"><img src="../../media/svg/scroll_down.svg" alt="scroll arrow" class="scroll"></a>
         </div>
 
     </header>
@@ -71,19 +72,163 @@
         </div>
 
         <div id="videos" class="creations-section">
-            <h3>Videos</h3>
-            <div class="creations-gallery">
-                <p>ceci est la section video</p>
-                <div class="video-player">
-                    <!-- Insérez ici votre code pour le premier lecteur vidéo -->
+            <div id="nav" class="nav">
+                <img class="nav__logo" src="../media/images/timflix_logo.png" alt="" />
+                <img class="nav__avatar" src="../media/images/Netflix-avatar.png" alt="" />
+            </div>
+
+
+            <header class="banner">
+                <div class="banner__contents">
+                    <h1 class="banner__title">Virtual Rivalry</h1>
+                    <div class="banner__buttons">
+                        <button id="play-button" class="banner__button">Play</button>
+                        <button class="banner__button">My List</button>
+                    </div>
+                    <h1 class="banner__description">
+                        A mysterious man is observing a video game player. He is trying to understand the player's
+                        strategy. But
+                        the player is not a human. He is an AI.
+                    </h1>
                 </div>
-                <div class="video-player">
-                    <!-- Insérez ici votre code pour le deuxième lecteur vidéo -->
-                </div>
-                <div class="video-player">
-                    <!-- Insérez ici votre code pour le troisième lecteur vidéo -->
+                <div class="banner--fadeBottom"></div>
+            </header>
+
+
+            <!-- <div class="row">
+                <h2>TIMFLIX ORIGINALS</h2>
+                <div class="row__posters">
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge" src="/media/images/minia/minia_virtual_rivalry.png" />
+                    </div>
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge" src="/media/images/minia/minia_m.png" />
+                    </div>
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge"
+                            src="/media/images/minia/minia_different_types_of_shots.png" />
+                    </div>
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge" src="/media/images/minia/minia_cinemagraph_1.png" />
+                    </div>
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge" src="/media/images/minia/minia_cinemagraph_2.png" />
+                    </div>
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge" src="/media/images/minia/minia_walking_1.png" />
+                    </div>
+
+                    <div class="poster-container portrait">
+                        <img class="row__poster row__posterLarge" src="/media/images/minia/minia_walking_2.png" />
+                    </div>
+
+
+
                 </div>
             </div>
+
+            <div class="overlay" id="overlay">
+                <div class="video-container">
+                    <video id="video" controls autoplay>
+                        Votre navigateur ne prend pas en charge la lecture de vidéos.
+                    </video>
+                    <button id="close-btn" class="close-button">Fermer</button>
+                </div>
+            </div>
+
+
+            <script>
+                const nav = document.getElementById('nav');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY >= 100) {
+                        nav.classList.add('nav__black');
+                    } else {
+                        nav.classList.remove('nav__black');
+                    }
+                });
+
+
+                // Récupérez le bouton "Play" par son ID
+                const playButton = document.getElementById('play-button');
+
+                // Ajoutez un gestionnaire d'événements clic au bouton "Play"
+                playButton.addEventListener('click', () => {
+                    // Sélectionnez la vidéo et modifiez sa source pour la première vidéo
+                    const video = document.getElementById('video');
+                    video.src = '../media/videos/BINDA_virtual_rivalry.mp4';
+
+                    // Affichez l'overlay
+                    overlay.style.display = 'flex';
+                });
+
+
+
+                // Sélectionnez tous les posters
+                const posters = document.querySelectorAll('.row__posterLarge');
+
+                // Sélectionnez l'overlay et le bouton de fermeture
+                const overlay = document.getElementById('overlay');
+                const closeButton = document.getElementById('close-btn');
+
+                // Créez un tableau d'URLs de vidéos correspondantes à chaque poster
+                const videoSources = [
+                    '../media/videos/BINDA_virtual_rivalry.mp4',
+                    '../media/videos/m.mp4',
+                    '../media/videos/BINDA_9_shots.mp4',
+                    '../media/videos/binda_netflix_cinemagraph.mp4',
+                    '../media/videos/binda_oasis_loop.mp4',
+                    '../media/videos/arctic_monkeys.mp4',
+                    '../media/videos/shaka_ponk.mp4',
+                    // Ajoutez d'autres liens de vidéos ici (un pour chaque poster)
+                ];
+
+                // Ajoutez un gestionnaire d'événement clic à chaque poster
+                posters.forEach((poster, index) => {
+                    poster.addEventListener('click', () => {
+                        // Sélectionnez la vidéo et modifiez sa source en utilisant l'index
+                        const video = document.getElementById('video');
+                        video.src = videoSources[index];
+
+                        // Affichez l'overlay
+                        overlay.style.display = 'flex';
+                    });
+                });
+
+                // Ajoutez un gestionnaire d'événement clic pour fermer l'overlay
+                closeButton.addEventListener('click', () => {
+                    // Cachez l'overlay
+                    overlay.style.display = 'none';
+
+                    // Arrêtez la vidéo lorsque l'overlay est fermé (facultatif)
+                    const video = document.getElementById('video');
+                    video.pause();
+                    video.currentTime = 0;
+                });
+
+                // Ajoutez un gestionnaire d'événement clic pour fermer l'overlay en cliquant à l'extérieur de la vidéo
+                overlay.addEventListener('click', (event) => {
+                    if (event.target === overlay) {
+                        // Cachez l'overlay
+                        overlay.style.display = 'none';
+
+                        // Arrêtez la vidéo lorsque l'overlay est fermé (facultatif)
+                        const video = document.getElementById('video');
+                        video.pause();
+                        video.currentTime = 0;
+                    }
+
+
+                });
+
+
+
+            </script> -->
         </div>
 
         <div id="design" class="creations-section">
@@ -147,29 +292,29 @@
 
 <script>
     // Récupérez les éléments de la navigation et les sections
-        const creationsNav = document.querySelector('.creations-nav ul');
-        const creationsSections = document.querySelectorAll('.creations-section');
+    const creationsNav = document.querySelector('.creations-nav ul');
+    const creationsSections = document.querySelectorAll('.creations-section');
 
-        // Écoutez les clics sur les liens de la navigation
-        creationsNav.addEventListener('click', function (e) {
-            e.preventDefault(); // Empêche le comportement par défaut du lien
+    // Écoutez les clics sur les liens de la navigation
+    creationsNav.addEventListener('click', function (e) {
+        e.preventDefault(); // Empêche le comportement par défaut du lien
 
-            // Vérifiez si l'élément cliqué est un lien
-            if (e.target.tagName === 'A') {
-                // Récupérez l'ID de la section cible
-                const targetSectionId = e.target.getAttribute('href').substring(1);
+        // Vérifiez si l'élément cliqué est un lien
+        if (e.target.tagName === 'A') {
+            // Récupérez l'ID de la section cible
+            const targetSectionId = e.target.getAttribute('href').substring(1);
 
-                // Parcourez toutes les sections et masquez-les
-                creationsSections.forEach(section => {
-                    section.style.display = 'none';
-                });
+            // Parcourez toutes les sections et masquez-les
+            creationsSections.forEach(section => {
+                section.style.display = 'none';
+            });
 
-                // Affichez la section cible
-                const targetSection = document.getElementById(targetSectionId);
-                if (targetSection) {
-                    targetSection.style.display = 'block';
-                }
+            // Affichez la section cible
+            const targetSection = document.getElementById(targetSectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
             }
-        });
+        }
+    });
 
 </script>

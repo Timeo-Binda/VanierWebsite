@@ -126,7 +126,7 @@ nav{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5%;
+  margin-inline: 5%;
   margin-top: 3%;
 }
 
@@ -142,7 +142,7 @@ nav{
   }
 }
 
-button {
+button:not(#increase-minutes, #increase-seconds, #decrease-minutes, #decrease-seconds) {
   display: inline-block;
   margin: 5%;
   padding: 1.5em 5em;

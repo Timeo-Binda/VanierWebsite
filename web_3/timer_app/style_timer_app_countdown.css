@@ -1,0 +1,47 @@
+
+
+
+.time-buttons {
+  display: flex;
+  justify-content: center;
+  scale:1;
+}
+
+.countdown-button {
+ display: inline-block;
+ margin-bottom:2%;
+ margin-inline: 1%;
+  padding: 1.5em 5em;
+  background: var(--greyLight-1);
+  border: none;
+  border-radius: .5rem;
+  color: #444;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .2rem;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  transition: .2s ease-in-out;
+  box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+              -6px -6px 10px rgba(255, 255, 255, .5),
+              6px 6px 8px rgba(255, 255, 255, .075),
+              6px 6px 10px rgba(0, 0, 0, .15);
+}
+
+@media screen and (max-width: 900px) {
+.time-buttons {
+  scale: 0.7;
+  margin: 2%;
+}
+}
+
+
+
+
+.neumorphic-button:hover {
+  background-color: #e0e0e0;
+}
+
+
+

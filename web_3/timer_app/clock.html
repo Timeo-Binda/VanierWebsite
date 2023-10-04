@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style_timer_app_buttons.css">
     <link rel="stylesheet" href="style_timer_app_clock.css">
     <link rel="stylesheet" href="style_timer_app_stop_watch.css">
+    <link rel="stylesheet" href="style_timer_app_countdown.css">
     <title>Timer App Sample</title>
 
     <style>
@@ -122,6 +123,20 @@
                     <button id="down_start">Start</button>
                     <button id="down_stop">Stop</button>
                 </div>
+                
+                <div class="time-buttons">
+                    <button class="countdown-button" id="increase-minutes">&#9650;</button>
+                    <button class="countdown-button" id="increase-seconds">&#9650;</button>
+                </div>
+
+                <div class="time-buttons">
+                    <button class="countdown-button" id="decrease-minutes">&#9660;</button>
+                    <button class="countdown-button" id="decrease-seconds">&#9660;</button>
+                </div>
+
+
+
+
             </section>
         </article>
 
@@ -257,6 +272,37 @@
 
         };
         countdown();
+
+        document.getElementById("increase-minutes").addEventListener("click", function () {
+            let m = parseInt(document.getElementById("down_m").value);
+            m++;
+            document.getElementById("down_m").value = m;
+        });
+
+        document.getElementById("decrease-minutes").addEventListener("click", function () {
+            let m = parseInt(document.getElementById("down_m").value);
+            if (m > 0) {
+                m--;
+            }
+            document.getElementById("down_m").value = m;
+        });
+
+        document.getElementById("increase-seconds").addEventListener("click", function () {
+            let s = parseInt(document.getElementById("down_s").value);
+            if (s < 59) {
+                s++;
+            }
+            document.getElementById("down_s").value = s;
+        });
+
+        document.getElementById("decrease-seconds").addEventListener("click", function () {
+            let s = parseInt(document.getElementById("down_s").value);
+            if (s > 0) {
+                s--;
+            }
+            document.getElementById("down_s").value = s;
+        });
+
 
         //STOP WATCH
         let watch = function () {
