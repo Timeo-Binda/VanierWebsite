@@ -184,3 +184,25 @@ button img {
   height: 10%; /* Garantit que la hauteur est ajustée proportionnellement */
   display: block; /* Pour supprimer tout espace résiduel sous l'image */
 }
+
+
+form {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 3rem;
+      margin-top: 5%;
+}
+
+form input {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  outline: none;
+  font-size: inherit;
+  width: 2em;
+}
