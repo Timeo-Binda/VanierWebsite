@@ -69,33 +69,9 @@
             </div>
         </nav>
 
-        <article id="clock">
-            <!-- <h2>Clock</h2>
-            <section id="digital">
-                <span id="clock_hours"></span> :
-                <span id="clock_minutes"></span> :
-                <span id="clock_seconds"></span>
-            </section>
-            <section id="analogue">
-                <svg width="100%" height="100%" viewBox="0 0 600 600" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                    xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
-                 <circle class="circle_clock" cx="300" cy="300" r="299" ></circle> 
-                    <g id="svg_s">
-                        <path d="M 300 300 L 300 10" style="fill:none;stroke:blue;stroke-width:1px;" />
-                    </g>
-                    <g id="svg_m">
-                        <path d="M 300 300 L 300 50" style="fill:none;stroke:red;stroke-width:3px;" />
-                    </g>
-                    <g id="svg_h">
-                        <path d="M 300 300 L 300 100" style="fill:none;stroke:green;stroke-width:3px;" />
-                    </g>
-
-                </svg> -->
-            </section>
-            <!-- Updated HTML with centered clock hands -->
-
-            <section>
-                <div class="clock">
+        <article class="two-clocks" id="clock">
+            <section class="clock-container">
+                <div class="clock" id="toronto-clock">
                     <div class="needles">
                         <div class="hour-hand" id="svg_h"></div>
                         <div class="minute-hand" id="svg_m"></div>
@@ -109,9 +85,29 @@
                         <span class="marker__4"></span>
                     </div>
                 </div>
+                <p>Toronto</p>
             </section>
 
+            <section class="clock-container">
+                <div class="clock" id="paris-clock">
+                    <div class="needles">
+                        <div class="hour-hand" id="svg_h2"></div>
+                        <div class="minute-hand" id="svg_m2"></div>
+                        <div class="second-hand" id="svg_s2"></div>
+                    </div>
+                    <div class="point"></div>
+                    <div class="marker">
+                        <span class="marker__1"></span>
+                        <span class="marker__2"></span>
+                        <span class="marker__3"></span>
+                        <span class="marker__4"></span>
+                    </div>
+                </div>
+                <p>Paris</p>
+            </section>
         </article>
+
+
 
         <article id="countdown">
             <section id="down_form">
@@ -123,7 +119,7 @@
                     <button id="down_start">Start</button>
                     <button id="down_stop">Stop</button>
                 </div>
-                
+
                 <div class="time-buttons">
                     <button class="countdown-button" id="increase-minutes">&#9650;</button>
                     <button class="countdown-button" id="increase-seconds">&#9650;</button>
@@ -163,7 +159,7 @@
         </audio>
 
 
-    </div><!--wrapper-->
+    </div>
     <script>
 
 
@@ -200,6 +196,40 @@
 
         // Refresh the clock every 1000 milliseconds (1 second)
         window.setInterval(clockF, 1000);
+
+        let clockP = async function () {
+            try {
+                // Fetch the current time from the WorldTimeAPI for Paris
+                let response = await fetch('http://worldtimeapi.org/api/timezone/europe/paris');
+                let data = await response.json();
+
+                // Extract hours, minutes, and seconds from the API response
+                let h = parseInt(data.datetime.slice(11, 13));
+                let m = parseInt(data.datetime.slice(14, 16));
+                let s = parseInt(data.datetime.slice(17, 19));
+
+                h = h > 12 ? h - 12 : h;
+
+                console.log(h, m, s);
+
+                // Calculate the rotation angles for the clock hands
+                let sDeg = (s / 60) * 360;
+                let mDeg = ((m + s / 60) / 60) * 360;
+                let hDeg = ((h + m / 60) / 12) * 360;
+
+                // Apply rotations to the Paris clock hands
+                document.getElementById("svg_s2").style.transform = "rotate(" + (sDeg + 180) + "deg)";
+                document.getElementById("svg_m2").style.transform = "rotate(" + (mDeg + 180) + "deg)";
+                document.getElementById("svg_h2").style.transform = "rotate(" + (hDeg + 180) + "deg)";
+
+            } catch (error) {
+                console.error("Error fetching the time for Paris:", error);
+            }
+        };
+
+        // Refresh the Paris clock every 1000 milliseconds (1 second)
+        window.setInterval(clockP, 1000);
+
 
 
 

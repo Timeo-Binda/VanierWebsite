@@ -4,6 +4,20 @@ body {
     background-color: #E4EBF5;
 }
 
+.two-clocks{
+  display: flex;
+  justify-content: center;
+  flex-direction: raw;
+}
+
+
+.clock-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
   .clock {
   margin-inline: auto;
   margin-top: 10%;  
@@ -19,6 +33,11 @@ body {
   align-items: center;
   position: relative;
   scale: 2;
+}
+
+.clock p {
+    margin-top: 10px;
+    font-weight: bold;
 }
 
 

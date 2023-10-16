@@ -179,11 +179,7 @@ img{
   height: 10%;
 }
 
-button img {
-  width: auto; /* La largeur de l'image occupera la largeur du bouton */
-  height: 10%; /* Garantit que la hauteur est ajustée proportionnellement */
-  display: block; /* Pour supprimer tout espace résiduel sous l'image */
-}
+
 
 
 form {

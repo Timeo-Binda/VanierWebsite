@@ -142,7 +142,8 @@ nav{
   }
 }
 
-button:not(#increase-minutes, #increase-seconds, #decrease-minutes, #decrease-seconds) {
+
+button {
   display: inline-block;
   margin: 5%;
   padding: 1.5em 5em;
@@ -183,7 +184,10 @@ button:active {
   }
 }
 
-
+#increase-minutes, #increase-seconds, #decrease-minutes, #decrease-seconds{
+  margin: 2%;
+  
+}
 
 
 
