@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style_timer_app_clock.css">
     <link rel="stylesheet" href="style_timer_app_stop_watch.css">
     <link rel="stylesheet" href="style_timer_app_countdown.css">
+    <link rel="stylesheet" href="style_timer_app_dark_mode.css">
+
     <title>Timer App Sample</title>
 
     <style>
@@ -67,6 +69,14 @@
 
                 <div class="segmented-control__color"></div>
             </div>
+
+            <button id="dark-mode-button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path
+                        d="M12 0C18.627 0 24 5.373 24 12s-5.373 12-12 12S0 18.627 0 12 5.373 0 12 0zm0 22C6.486 22 2 17.514 2 12 2 6.486 6.486 2 12 2s10 4.486 10 10-4.486 10-10 10zm0-6h-4v-2h4v2zm0-4a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+            </button>
+
         </nav>
 
         <article class="two-clocks" id="clock">
@@ -402,6 +412,23 @@
             });
         };
         ui();
+
+
+
+
+
+
+
+
+
+        const darkModeButton = document.getElementById('dark-mode-button');
+            const body = document.body;
+
+            // Écoutez le clic sur le bouton Dark Mode
+            darkModeButton.addEventListener('click', () => {
+                // Basculez la classe dark-mode sur le corps du document
+                body.classList.toggle('dark-mode');
+            });
 
     </script>
 </body>

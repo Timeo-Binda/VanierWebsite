@@ -2,15 +2,8 @@
 
 body {
     background-color: #E4EBF5;
+    background-color: # ;
 }
-
-.two-clocks{
-  display: flex;
-  justify-content: center;
-  flex-direction: raw;
-}
-
-
 .clock-container {
     display: flex;
     flex-direction: column;
@@ -35,10 +28,6 @@ body {
   scale: 2;
 }
 
-.clock p {
-    margin-top: 10px;
-    font-weight: bold;
-}
 
 
 
@@ -92,6 +81,7 @@ body {
   border-radius: 50%;
   background: #7cb1ec;
   z-index: 300;
+
 }
 .clock .marker {
   width: 95%;
