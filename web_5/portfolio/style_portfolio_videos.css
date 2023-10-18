@@ -1,26 +1,44 @@
-/* .row__poster {
+/* Adjust the container to take the full width */
+#videos.creations-section {
   width: 100%;
-  object-fit: contain;
-  max-height: 100px;
-  margin-right: 10px;
-  transition: transform 450ms;
+  position: relative;
+  z-index: 1;
+  background-color: #111;
 }
 
+/* Reset the banner styles for full width */
+.banner {
+  height: 100vh; /* Use viewport height for full-screen height */
+}
+
+.banner__contents {
+  padding-top: 40vh; /* Adjust the padding as needed for vertical alignment */
+}
+
+/* Center the row section horizontally */
+.row {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px; /* Add padding for spacing */
+  color: #fff;
+}
+
+/* Center the posters within the row section */
 .row__posters {
   display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  padding: 20px;
-  scrollbar-width: none; 
-  -ms-overflow-style: none; 
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
+
 
 .row__poster:hover {
   transform: scale(1.08);
 }
 
 .row__posters::-webkit-scrollbar {
-  display: none; 
+  display: none; /* Suppression des barres de défilement Chrome/Safari */
 }
 
 .row__posterLarge {
@@ -35,19 +53,20 @@
   margin-left: 20px;
 }
 
-
+/* Styles pour la bannière */
 .banner {
-  background-image: url("../media/images/cover_timflix_1.1.1.jpg");
+  background-image: url("../../media/images/cover_timflix_1.1.1.jpg");
   background-size: cover;
   background-position: center center;
   object-fit: contain;
-  height: 448px;
+  height: auto;
 }
 
 .banner__contents {
   margin-left: 30px;
   padding-top: 140px;
   height: 190px;
+  color: #fff;
 }
 
 .banner__title {
@@ -98,6 +117,7 @@
 }
 
 
+/* Styles pour la navigation */
 .nav__logo {
   width: 80px;
   object-fit: contain;
@@ -108,10 +128,10 @@
   object-fit: contain;
 }
 
-.nav {
-  position: fixed;
-  top: 0;
-  width: 100%;
+
+
+.nav_netflix {
+
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -125,6 +145,8 @@
 }
 
 
+
+/* Styles pour l'overlay */
 .overlay {
   display: none;
   position: fixed;
@@ -161,7 +183,7 @@ video {
   font-weight: bold;
 }
 
-
+/* Styles pour les posters */
 .row__posters {
   cursor: pointer;
   flex-wrap: wrap;
@@ -185,7 +207,7 @@ video {
   transform: scale(1.09);
 }
 
-
+/* Styles pour les posters sur mobile */
 @media (max-width: 767px) {
   .poster-container.portrait {
     width: auto;
@@ -209,4 +231,6 @@ video {
 .poster-container.portrait {
   height: 100%;
 }
-} */
+}
+
+

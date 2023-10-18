@@ -1,69 +1,73 @@
-
-
 body {
-    background-color: #E4EBF5;
-    background-color: # ;
-}
-.clock-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+  background-color: #e4ebf5;
 }
 
-  .clock {
+.two-clocks{
+    display: flex;
+    justify-content: center;
+    
+}
+
+.clock-container{
+    display: flex;
+    height: 20%;
+    width: 20%;
+    margin: 5%;
+    aspect-ratio: 1/1;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+.clock {
   margin-inline: auto;
-  margin-top: 10%;  
+  margin-top: 10%;
   grid-column: 2 / 3;
   grid-row: 1 / 3;
   width: 12rem;
   height: 12rem;
-  justify-self: center;
   box-shadow: 0.3rem 0.3rem 0.6rem #c8d0e7, -0.2rem -0.2rem 0.5rem #fff;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   scale: 2;
 }
 
-
-
-
-
-.clock .hour-hand, .clock .minute-hand, .clock .second-hand {
+.clock .hour-hand,
+.clock .minute-hand,
+.clock .second-hand {
   position: absolute;
   border-radius: 0.2rem;
   z-index: 200;
-  transform-origin: 0 0; 
-  left: 50%; 
-  top: 50%; 
-  transform: translateX(-50%) translateY(-100%); 
+  transform-origin: 0 0;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-100%);
 }
 
 .clock .hand {
   position: absolute;
   z-index: 200;
-  transform-origin: top center; 
-  top: 50%; 
-  left: 50%; 
+  transform-origin: top center;
+  top: 50%;
+  left: 50%;
   transition: transform 0.5s cubic-bezier(0.4, 2.5, 0.4, 0.9);
 }
 
 .clock .hour-hand {
-  
   width: 0.3rem;
   height: 3.2rem;
   background: #f81460;
-  transform: translateX(-50%) translateY(-100%);}
+  transform: translateX(-50%) translateY(-100%);
+}
 
 .clock .minute-hand {
   /* Styles pour l'aiguille des minutes */
   width: 0.2rem;
   height: 4.6rem;
   background: #000;
-  transform: translateX(-50%) translateY(-100%); 
+  transform: translateX(-50%) translateY(-100%);
 }
 
 .clock .second-hand {
@@ -71,41 +75,43 @@ body {
   width: 0.01rem;
   height: 5.2rem;
   background: #7cb1ec;
-  transform: translateX(-50%) translateY(-100%); 
+  transform: translateX(-50%) translateY(-100%);
 }
 
 .clock .point {
   position: absolute;
-  width: .8rem;
-  height: .8rem;
+  width: 0.8rem;
+  height: 0.8rem;
   border-radius: 50%;
   background: #7cb1ec;
   z-index: 300;
-
 }
 .clock .marker {
   width: 95%;
   height: 95%;
   border-radius: 50%;
   position: relative;
-  box-shadow:inset -2px -2px 6px #fff,inset 2px 2px 6px #c8d0e7;
-
+  box-shadow: inset -2px -2px 6px #fff, inset 2px 2px 6px #c8d0e7;
 }
 
-.clock .marker__1, .clock .marker__2, .clock .marker__3, .clock .marker__4 {
+.clock .marker__1,
+.clock .marker__2,
+.clock .marker__3,
+.clock .marker__4 {
   position: absolute;
-  border-radius: .1rem;
-  box-shadow: inset -1px -1px 2px #fff,inset 1px 1px 2px #808080;
- 
+  border-radius: 0.1rem;
+  box-shadow: inset -1px -1px 2px #fff, inset 1px 1px 2px #808080;
 }
-.clock .marker__1, .clock .marker__2 {
-  width: .2rem;
-  height: .6rem;
+.clock .marker__1,
+.clock .marker__2 {
+  width: 0.2rem;
+  height: 0.6rem;
   left: 5.6rem;
 }
-.clock .marker__3, .clock .marker__4 {
-  width: .6rem;
-  height: .2rem;
+.clock .marker__3,
+.clock .marker__4 {
+  width: 0.6rem;
+  height: 0.2rem;
   top: 5.6rem;
 }
 .clock .marker__1 {
@@ -114,7 +120,7 @@ body {
 .clock .marker__2 {
   top: 98%;
   -webkit-transform: translateY(-0.6rem);
-          transform: translateY(-0.6rem);
+  transform: translateY(-0.6rem);
 }
 .clock .marker__3 {
   left: 2%;
@@ -122,18 +128,22 @@ body {
 .clock .marker__4 {
   left: 98%;
   -webkit-transform: translateX(-0.6rem);
-          transform: translateX(-0.6rem);
+  transform: translateX(-0.6rem);
 }
-
 
 @media screen and (max-width: 900px) {
   .clock {
     scale: 1.3;
-    margin-top: 30%;
   }
+  .two-clocks{
+    flex-direction: column;
+    align-items: center;
+.clock-container{
+  align-items: center;
+  width: 80%;
+  height: 80%;
 }
-
-
+}
 
 
 

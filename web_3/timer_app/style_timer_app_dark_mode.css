@@ -62,3 +62,16 @@
   --primary-dark: #101010; 
   --white: #333333; 
 }
+
+
+.dark-mode .clock .marker {
+  box-shadow: inset -2px -2px 6px #323d4d, inset 2px 2px 6px #161616;
+}
+
+.dark-mode .clock .marker__1,
+.dark-mode .clock .marker__2,
+.dark-mode .clock .marker__3,
+.dark-mode .clock .marker__4 {
+  box-shadow: inset -1px -1px 2px #323d4d, inset 1px 1px 2px #161616;
+}
+

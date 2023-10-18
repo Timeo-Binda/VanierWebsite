@@ -13,7 +13,7 @@
 <body>
     <header>
         <video autoplay loop muted id="bgVideo">
-            <source src="../../media/videos/arctic_monkeys.mp4" type="video/mp4">
+            <source src="../../media/video_site/arctic_monkeys.mp4" type="video/mp4">
             <!-- Ajoutez d'autres sources vidéo pour une compatibilité multi-navigateurs si nécessaire -->
         </video>
         <div class="nav">
@@ -72,13 +72,13 @@
         </div>
 
         <div id="videos" class="creations-section">
-            <div id="nav" class="nav">
-                <img class="nav__logo" src="../media/images/timflix_logo.png" alt="" />
-                <img class="nav__avatar" src="../media/images/Netflix-avatar.png" alt="" />
+            <div id="nav" class="nav_netflix">
+                <img class="nav__logo" src="../../media/images/timflix_logo.png" alt="" />
+                <img class="nav__avatar" src="../../media/images/Netflix-avatar.png" alt="" />
             </div>
 
 
-            <header class="banner">
+            <div class="banner">
                 <div class="banner__contents">
                     <h1 class="banner__title">Virtual Rivalry</h1>
                     <div class="banner__buttons">
@@ -92,10 +92,10 @@
                     </h1>
                 </div>
                 <div class="banner--fadeBottom"></div>
-            </header>
+            </div>
 
 
-            <!-- <div class="row">
+         <div class="row">
                 <h2>TIMFLIX ORIGINALS</h2>
                 <div class="row__posters">
 
@@ -161,7 +161,7 @@
                 playButton.addEventListener('click', () => {
                     // Sélectionnez la vidéo et modifiez sa source pour la première vidéo
                     const video = document.getElementById('video');
-                    video.src = '../media/videos/BINDA_virtual_rivalry.mp4';
+                    video.src = '../media/video_site/BINDA_virtual_rivalry.mp4';
 
                     // Affichez l'overlay
                     overlay.style.display = 'flex';
@@ -178,13 +178,13 @@
 
                 // Créez un tableau d'URLs de vidéos correspondantes à chaque poster
                 const videoSources = [
-                    '../media/videos/BINDA_virtual_rivalry.mp4',
-                    '../media/videos/m.mp4',
-                    '../media/videos/BINDA_9_shots.mp4',
-                    '../media/videos/binda_netflix_cinemagraph.mp4',
-                    '../media/videos/binda_oasis_loop.mp4',
-                    '../media/videos/arctic_monkeys.mp4',
-                    '../media/videos/shaka_ponk.mp4',
+                    '../../media/video_site/BINDA_virtual_rivalry.mp4',
+                    '../../media/video_site/m.mp4',
+                    '../../media/video_site/BINDA_9_shots.mp4',
+                    '../../media/video_site/binda_netflix_cinemagraph.mp4',
+                    '../../media/video_site/binda_oasis_loop.mp4',
+                    '../../media/video_site/arctic_monkeys.mp4',
+                    '../../media/video_site/shaka_ponk.mp4',
                     // Ajoutez d'autres liens de vidéos ici (un pour chaque poster)
                 ];
 
@@ -228,7 +228,7 @@
 
 
 
-            </script> -->
+            </script> 
         </div>
 
         <div id="design" class="creations-section">
