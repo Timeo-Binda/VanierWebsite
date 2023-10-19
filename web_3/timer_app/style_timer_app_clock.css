@@ -1,11 +1,14 @@
 body {
   background-color: #e4ebf5;
+  font-family: 'Inter', sans-serif;
+font-family: 'Outfit', sans-serif;
+font-family: 'Roboto', sans-serif;
 }
 
 .two-clocks{
     display: flex;
     justify-content: center;
-    
+    margin-top: 10%;
 }
 
 .clock-container{
