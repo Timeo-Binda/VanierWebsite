@@ -8,7 +8,7 @@ font-family: 'Roboto', sans-serif;
 .two-clocks{
     display: flex;
     justify-content: center;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 
 .clock-container{
