@@ -105,7 +105,7 @@
                         <span class="marker__4"></span>
                     </div>
                 </div>
-                <p>MTL</p> 
+                <p>MTL</p>
             </section>
 
             <section class="clock-container">
@@ -172,12 +172,15 @@
                     <button id="watch_reset">Reset</button>
                 </div>
             </section>
+             <div style="height: 300px;"></div> <!-- this is just to add a scroll bar to look smoother on every page when you change btw timer and another page -->
         </article>
 
         <audio id="blip">
             <source src="blip.wav" type="audio/wav">
         </audio>
 
+
+        
 
     </div>
     <script>
@@ -432,13 +435,13 @@
 
 
         const darkModeButton = document.getElementById('dark-mode-button');
-            const body = document.body;
+        const body = document.body;
 
-            // Écoutez le clic sur le bouton Dark Mode
-            darkModeButton.addEventListener('click', () => {
-                // Basculez la classe dark-mode sur le corps du document
-                body.classList.toggle('dark-mode');
-            });
+        // Écoutez le clic sur le bouton Dark Mode
+        darkModeButton.addEventListener('click', () => {
+            // Basculez la classe dark-mode sur le corps du document
+            body.classList.toggle('dark-mode');
+        });
 
     </script>
 </body>
