@@ -190,7 +190,7 @@
         let clockF = async function () {
             try {
                 // Fetch the current time from the WorldTimeAPI
-                let response = await fetch('http://worldtimeapi.org/api/timezone/america/toronto');
+                let response = await fetch('https://worldtimeapi.org/api/timezone/america/toronto');
                 let data = await response.json();
 
                 // Extract hours, minutes, and seconds from the API response
@@ -223,7 +223,7 @@
         let clockP = async function () {
             try {
                 // Fetch the current time from the WorldTimeAPI for Paris
-                let response = await fetch('http://worldtimeapi.org/api/timezone/europe/paris');
+                let response = await fetch('https://worldtimeapi.org/api/timezone/europe/paris');
                 let data = await response.json();
 
                 // Extract hours, minutes, and seconds from the API response
