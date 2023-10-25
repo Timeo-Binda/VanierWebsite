@@ -163,12 +163,14 @@ body {
   opacity: 1;
 }
 
+
+
 .content {
-  display: flex;
   flex-direction: column;
   align-items: center;
 }
-header > .content > h1 {
+
+header > .main_title > .content > h1 {
   font-size: 50px;
   color: #fff;
   text-align: center;
@@ -177,6 +179,11 @@ header > .content > h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+header > .main_title > .content > a{
+  display: flex;
+  justify-content: center;
 }
 
 header {
@@ -191,10 +198,11 @@ header {
   left: 0;
   min-width: 100%;
   min-height: 100%;
-  z-index: -1; /* Assurez-vous que la vidéo est en arrière-plan */
+  z-index: -1; 
+
 }
 
-/* Le reste de votre CSS pour le contenu du header */
+
 
 /* Masquez toutes les sections sauf la section "Vidéos" par défaut */
 .creations-section {

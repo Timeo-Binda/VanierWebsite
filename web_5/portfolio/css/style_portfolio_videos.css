@@ -32,7 +32,6 @@
   gap: 10px;
 }
 
-
 .row__poster:hover {
   transform: scale(1.08);
 }
@@ -55,7 +54,7 @@
 
 /* Styles pour la bannière */
 .banner {
-  background-image: url("../../media/images/cover_timflix_1.1.1.jpg");
+  background-image: url("../../../media/images/cover_timflix_1.1.1.jpg");
   background-size: cover;
   background-position: center center;
   object-fit: contain;
@@ -116,7 +115,6 @@
   );
 }
 
-
 /* Styles pour la navigation */
 .nav__logo {
   width: 80px;
@@ -128,10 +126,7 @@
   object-fit: contain;
 }
 
-
-
 .nav_netflix {
-
   display: flex;
   justify-content: space-between;
   padding: 20px;
@@ -143,8 +138,6 @@
 .nav__black {
   background-color: #111;
 }
-
-
 
 /* Styles pour l'overlay */
 .overlay {
@@ -215,7 +208,7 @@ video {
     margin-right: 0;
   }
 
-  .row__poster{
+  .row__poster {
     margin-right: 10%;
   }
 
@@ -227,10 +220,8 @@ video {
 
   .banner__description {
     width: 90%;
+  }
+  .poster-container.portrait {
+    height: 100%;
+  }
 }
-.poster-container.portrait {
-  height: 100%;
-}
-}
-
-

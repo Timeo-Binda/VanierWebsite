@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style_portfolio_master.css">
-    <link rel="stylesheet" href="style_portfolio_divers.css">
-    <link rel="stylesheet" href="style_portfolio_videos.css">
+    <link rel="stylesheet" href="css/style_portfolio_master.css">
+    <link rel="stylesheet" href="css/style_portfolio_divers.css">
+    <link rel="stylesheet" href="css/style_portfolio_videos.css">
+    <script src="js/js_video.js"></script>
     <title>Timeo's Portfolio</title>
 </head>
 
@@ -43,9 +44,11 @@
         </div>
 
         </div>
-        <div class="content">
-            <h1>Timéo BINDA</h1>
-            <a href="#creations"><img src="../../media/svg/scroll_down.svg" alt="scroll arrow" class="scroll"></a>
+        <div class="main_title">
+            <div class="content">
+                <h1>Timéo BINDA</h1>
+                <a href="#creations"><img src="../../media/svg/scroll_down.svg" alt="scroll arrow" class="scroll"></a>
+            </div>
         </div>
 
     </header>
@@ -62,6 +65,11 @@
         <div id="photos" class="creations-section">
             <h3>Photos</h3>
             <div class="creations-gallery">
+                <iframe width="560" rel=0 height="315"
+                    src="https://www.youtube.com/embed/eLbzASw5eLQ?si=G1ukPxyOtdIRbfQ2" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
 
                 <p>ceci est la section photo</p>
                 <a href="#"><img src="image1.jpg" alt="Image 1"></a>
@@ -95,7 +103,7 @@
             </div>
 
 
-         <div class="row">
+            <div class="row">
                 <h2>TIMFLIX ORIGINALS</h2>
                 <div class="row__posters">
 
@@ -127,9 +135,6 @@
                     <div class="poster-container portrait">
                         <img class="row__poster row__posterLarge" src="/media/images/minia/minia_walking_2.png" />
                     </div>
-
-
-
                 </div>
             </div>
 
@@ -141,94 +146,6 @@
                     <button id="close-btn" class="close-button">Fermer</button>
                 </div>
             </div>
-
-
-            <script>
-                const nav = document.getElementById('nav');
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY >= 100) {
-                        nav.classList.add('nav__black');
-                    } else {
-                        nav.classList.remove('nav__black');
-                    }
-                });
-
-
-                // Récupérez le bouton "Play" par son ID
-                const playButton = document.getElementById('play-button');
-
-                // Ajoutez un gestionnaire d'événements clic au bouton "Play"
-                playButton.addEventListener('click', () => {
-                    // Sélectionnez la vidéo et modifiez sa source pour la première vidéo
-                    const video = document.getElementById('video');
-                    video.src = '../media/video_site/BINDA_virtual_rivalry.mp4';
-
-                    // Affichez l'overlay
-                    overlay.style.display = 'flex';
-                });
-
-
-
-                // Sélectionnez tous les posters
-                const posters = document.querySelectorAll('.row__posterLarge');
-
-                // Sélectionnez l'overlay et le bouton de fermeture
-                const overlay = document.getElementById('overlay');
-                const closeButton = document.getElementById('close-btn');
-
-                // Créez un tableau d'URLs de vidéos correspondantes à chaque poster
-                const videoSources = [
-                    '../../media/video_site/BINDA_virtual_rivalry.mp4',
-                    '../../media/video_site/m.mp4',
-                    '../../media/video_site/BINDA_9_shots.mp4',
-                    '../../media/video_site/binda_netflix_cinemagraph.mp4',
-                    '../../media/video_site/binda_oasis_loop.mp4',
-                    '../../media/video_site/arctic_monkeys.mp4',
-                    '../../media/video_site/shaka_ponk.mp4',
-                    // Ajoutez d'autres liens de vidéos ici (un pour chaque poster)
-                ];
-
-                // Ajoutez un gestionnaire d'événement clic à chaque poster
-                posters.forEach((poster, index) => {
-                    poster.addEventListener('click', () => {
-                        // Sélectionnez la vidéo et modifiez sa source en utilisant l'index
-                        const video = document.getElementById('video');
-                        video.src = videoSources[index];
-
-                        // Affichez l'overlay
-                        overlay.style.display = 'flex';
-                    });
-                });
-
-                // Ajoutez un gestionnaire d'événement clic pour fermer l'overlay
-                closeButton.addEventListener('click', () => {
-                    // Cachez l'overlay
-                    overlay.style.display = 'none';
-
-                    // Arrêtez la vidéo lorsque l'overlay est fermé (facultatif)
-                    const video = document.getElementById('video');
-                    video.pause();
-                    video.currentTime = 0;
-                });
-
-                // Ajoutez un gestionnaire d'événement clic pour fermer l'overlay en cliquant à l'extérieur de la vidéo
-                overlay.addEventListener('click', (event) => {
-                    if (event.target === overlay) {
-                        // Cachez l'overlay
-                        overlay.style.display = 'none';
-
-                        // Arrêtez la vidéo lorsque l'overlay est fermé (facultatif)
-                        const video = document.getElementById('video');
-                        video.pause();
-                        video.currentTime = 0;
-                    }
-
-
-                });
-
-
-
-            </script> 
         </div>
 
         <div id="design" class="creations-section">
