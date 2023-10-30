@@ -17,16 +17,16 @@
 
 /* Center the row section horizontally */
 .row {
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   padding: 20px; /* Add padding for spacing */
   color: #fff;
+  background-color: #111;
 }
 
 /* Center the posters within the row section */
 .row__posters {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   gap: 10px;
@@ -48,9 +48,7 @@
   transform: scale(1.09);
 }
 
-.row {
-  margin-left: 20px;
-}
+
 
 /* Styles pour la bannière */
 .banner {
@@ -225,3 +223,6 @@ video {
     height: 100%;
   }
 }
+
+
+
