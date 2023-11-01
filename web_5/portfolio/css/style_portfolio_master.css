@@ -4,8 +4,6 @@
 @import url("style_portfolio_dev_web.css");
 @import url("style_portfolio_nav.css");
 
-
-
 html {
   scroll-behavior: smooth;
 }
@@ -14,9 +12,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: lato, sans-serif;
+  overflow-x: hidden;
+  background-color: #161616;
+  color: #fff;
 }
 
-header > .main_title >  h1 {
+header > .main_title > h1 {
   font-size: 50px;
   color: #fff;
   text-align: center;
@@ -27,11 +28,17 @@ header > .main_title >  h1 {
   align-items: center;
 }
 
-
+.nav-links {
+  z-index: 10;
+}
 
 .main_header {
   position: relative;
   overflow: hidden;
+  width: 100vw; /* La largeur de l'écran en unités de "vw" */
+  height: calc(
+    56.25vw
+  ); /* La hauteur est calculée à 56.25% de la largeur de l'écran */
 }
 
 #bgVideo {
@@ -40,32 +47,30 @@ header > .main_title >  h1 {
   left: 0;
   min-width: 100%;
   min-height: 100%;
-  z-index: -1; 
-
+  z-index: -1;
 }
 
 .logo {
-    fill: white;
-    width: 25%;
+  fill: white;
+  width: 25%;
 }
 
-.scroll_down{
+.scroll_down {
   display: flex;
+  justify-content: center;
   align-items: center;
-  background-color: tomato;
   animation: slideDown 2s linear infinite alternate;
+  margin: auto;
 }
-
 
 @keyframes slideDown {
   0% {
-    transform: translateY(0); /* Départ en haut */
+    transform: translateY(0);
   }
   100% {
-    transform: translateY(20px); /* Arrivée en bas (ajustez la valeur selon vos besoins) */
+    transform: translateY(20px);
   }
 }
-
 
 .main_title {
   position: absolute;
@@ -82,18 +87,31 @@ header > .main_title >  h1 {
   margin: 0; /* Pour supprimer la marge supérieure */
 }
 
-.scroll_down {
+.about {
   display: flex;
-  align-items: center;
-  background-color: tomato;
-  animation: slideDown 2s linear infinite alternate;
+  flex-direction: row;
+  margin-inline: 10%;
+  margin-top: 5%;
+  transform-style: preserve-3d;
 }
 
-@keyframes slideDown {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(20px);
-  }
+
+.about > .hoverable  {
+    width: 300%;
+}
+
+.about > .hoverable > img {
+    width: 100%;
+}
+
+
+
+
+
+
+.about > .text_about {
+  padding-right: 5%;
+}
+.about > .text_about > h3 {
+  font-size: 50px;
 }

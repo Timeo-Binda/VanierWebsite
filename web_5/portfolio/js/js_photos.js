@@ -12,3 +12,13 @@ $("video").click(function(){
   $("#myModal").modal();  
 });
 });//EOF Document.ready
+
+
+
+
+
+
+
+
+
+
