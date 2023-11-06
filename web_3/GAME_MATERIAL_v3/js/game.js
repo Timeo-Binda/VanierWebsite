@@ -177,7 +177,7 @@ if (goodyReady) {
 
     //Label
     ctx.fillStyle = "rgb(250, 250, 250)";
-    ctx.fillText("Goodies left: "+goodies.length, 32, 32);
+    ctx.fillText(player.x+" "+player.y+ " "+goodies.length, 32, 32);
 };
 
 //Generic function to check for collisions 
