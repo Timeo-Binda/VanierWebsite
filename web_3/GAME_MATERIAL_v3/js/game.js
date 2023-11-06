@@ -118,27 +118,42 @@ var init = function () {
     }
 };
 
-// The main game loop 
+// The main game loop
 var main = function () {
-    render();
-    window.requestAnimationFrame(main); 
-    
-    //move player
-if (player.x > 0 && player.x < canvas.width - player.width) {
-    player.x += vX;
-}
-else {
-    player.x -= vX;
-    vX = -vX; //bounce horizontal
-}
+    if (checkWin()) {
+        //WIN display win frame
+        if (winReady) {
+            ctx.drawImage(winImage, (canvas.width - winImage.width)/2, 
+                (canvas.height - winImage.height)/2);
+        }
+    }
+    else {
+        //Not yet won, play game
+        //move player
+        if (player.x > 0 && player.x < canvas.width - player.width) {
+            player.x += vX;
+        }
+        else {
+            player.x -= vX;
+            vX = -vX; //bounce
+        }
+        if (player.y > 0 && player.y < canvas.height - player.height) {
+            player.y += vY
+        }
+        else {
+            player.y -= vY;
+            vY = -vY; //bounce
+        }
+        //check collisions
+        for (var i in goodies) {
+            if (checkCollision(player,goodies[i])) {
+                goodies.splice(i,1);
+            }
+        }
 
-if (player.y > 0 && player.y < canvas.height - player.height) {
-    player.y += vY
-}
-else {
-    player.y -= vY;
-    vY = -vY; //bounce vertical
-}
+        render();
+        window.requestAnimationFrame(main);
+    }
 };
 
 // Draw everything
@@ -162,7 +177,27 @@ if (goodyReady) {
 
     //Label
     ctx.fillStyle = "rgb(250, 250, 250)";
-    ctx.fillText("Game on!", 32, 32);
+    ctx.fillText("Goodies left: "+goodies.length, 32, 32);
+};
+
+//Generic function to check for collisions 
+var checkCollision = function (obj1,obj2) {
+    if (obj1.x < (obj2.x + obj2.width) && 
+        (obj1.x + obj1.width) > obj2.x && 
+        obj1.y < (obj2.y + obj2.height) && 
+        (obj1.y + obj1.height) > obj2.y
+        ) {
+            return true;
+    }
+};
+
+//Check if we have won
+var checkWin = function () {
+    if (goodies.length > 0) { 
+        return false;
+    } else { 
+        return true;
+    }
 };
 
 init();
