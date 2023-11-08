@@ -142,6 +142,7 @@
   padding: 0.5em 0.8em;
   display: block;
   color: rgba(255, 255, 255, 0.5);
+  font-size: 1.2em;
   position: relative;
   text-decoration: none;
 }

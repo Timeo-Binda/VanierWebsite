@@ -14,12 +14,13 @@ body {
   font-family: lato, sans-serif;
   overflow-x: hidden;
   background-image: url("../medias/photos/bg.jpg");
+
   width: 100%;
   color: #fff;
 }
 
 header > .main_title > h1 {
-  font-size: 50px;
+  font-size: 100px;
   color: #fff;
   text-align: center;
   margin-top: 100px;
@@ -53,7 +54,7 @@ header > .main_title > h1 {
 
 .logo {
   fill: white;
-  width: 25%;
+  width: 28%;
 }
 
 .scroll_down {
@@ -100,7 +101,7 @@ header > .main_title > h1 {
   font-size: 18px;
 }
 
-.title_about {
+h3 {
   font-size: 50px;
   font-weight: bold;
 }
@@ -108,4 +109,49 @@ header > .main_title > h1 {
 .img_about {
   max-width: 30%;
   height: auto;
+}
+
+
+.about > .work > .works > .works-item > p{
+  font-size: 30px;
+}
+
+.work {
+width: 100%;
+}
+
+.works {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline: 10%;
+}
+
+.works-item {
+  display: flex;
+  flex-direction: column;
+  margin-right: 5%;
+  justify-content: center;
+  align-items: center;
+
+}
+
+
+
+
+
+a{
+  color: #fff;
+  text-decoration: none;
+}
+
+
+.contact-item{
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.contact-item > a{
+  margin-left: 20px;
 }
