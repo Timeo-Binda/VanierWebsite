@@ -1,8 +1,8 @@
 // Create the canvas
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.width = document.documentElement.clientWidth;
-canvas.height = document.documentElement.clientHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 document.querySelector("#gameBox").appendChild(canvas);
 
 // Load sprites
@@ -95,13 +95,23 @@ var zoomFactor = 8; // Par exemple, pour un zoom 8 fois plus grand
 var main = function () {
     if (checkWin()) {
         if (winReady) {
-            ctx.drawImage(winImage, (canvas.width - winImage.width) / 2,
-                (canvas.height - winImage.height) / 2);
+            ctx.drawImage(winImage, (canvas.width - winImage.width) / 2, (canvas.height - winImage.height) / 2);
         }
-    }
-    else {
+    } else {
         viewX = player.x - (canvas.width / 2);
         viewY = player.y - (canvas.height / 2);
+
+        // Vérification de collision avec les obstacles
+        for (var i in obstacles) {
+            if (checkCollision(player, obstacles[i])) {
+                // Collision détectée, réinitialisez la position du joueur ici ou effectuez d'autres actions
+                // Par exemple, pour empêcher le joueur de se déplacer vers le haut s'il touche un obstacle en bas :
+                if (player.y + player.height >= obstacles[i].y && player.y < obstacles[i].y + obstacles[i].height && player.x + player.width > obstacles[i].x && player.x < obstacles[i].x + obstacles[i].width) {
+                    player.y = obstacles[i].y + obstacles[i].height;
+                }
+                // Vous pouvez ajouter d'autres conditions pour gérer les collisions dans d'autres directions.
+            }
+        }
 
         for (var i in goodies) {
             if (checkCollision(player, goodies[i])) {
@@ -114,11 +124,15 @@ var main = function () {
     }
 };
 
+
+
+
 // Draw everything
 var render = function () {
     if (bgReady) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the old background
-        ctx.drawImage(bgImage, -viewX, -viewY, canvas.width, canvas.height);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Ajustez la position de l'arrière-plan (bg) en fonction de la position du joueur
+        ctx.drawImage(bgImage, -viewX, -viewY);
     }
 
     if (playerReady) {
@@ -131,9 +145,17 @@ var render = function () {
         }
     }
 
+    if (obstacles.length > 0) {
+        ctx.fillStyle = "rgb(100, 100, 100)"; // Gris foncé
+        for (var i in obstacles) {
+            ctx.fillRect(obstacles[i].x - viewX, obstacles[i].y - viewY, obstacles[i].width, obstacles[i].height);
+        }
+    }
+
     ctx.fillStyle = "rgb(250, 250, 250)";
     ctx.fillText("Goodies left: " + goodies.length, 32, 32);
 };
+
 
 var checkCollision = function (obj1, obj2) {
     if (obj1.x < (obj2.x + obj2.width) &&
@@ -152,6 +174,13 @@ var checkWin = function () {
         return true;
     }
 };
+
+var obstacles = [
+    { width: 64, height: 64, x: 100, y: 100 }, // Premier obstacle
+    { width: 64, height: 64, x: 200, y: 200 }, // Deuxième obstacle
+    // Ajoutez plus d'obstacles selon vos besoins
+];
+
 
 init();
 window.requestAnimationFrame(main);
