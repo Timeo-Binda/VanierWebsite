@@ -137,7 +137,8 @@ h3 {
   width: 100%;
   display: flex;
   align-items: center;
-  /* margin-inline: 10%; */
+  justify-content: space-evenly;
+  margin-top: 5%;
 }
 
 .works-item {
@@ -146,6 +147,36 @@ h3 {
   width: 20%;
   justify-content: center;
   align-items: center;
+  transition: transform 0.3s ease-in-out;
+  padding-top: 3.5%;
+}
+
+
+
+
+
+.works-item:hover {
+    transform: scale(1.1); /* Zoom l'ensemble de l'élément lorsqu'on survole */
+}
+
+.works-item:hover p {
+    opacity: 1; /* Rend le texte visible lorsqu'on survole l'élément */
+}
+
+.works-item::before {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+    border-radius: 10px; /* Ajuste le rayon de la bordure en fonction de tes préférences */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.works-item:hover::before {
+    opacity: 1; /* Rend la bordure visible lorsqu'on survole l'élément */
 }
 
 a {
@@ -172,12 +203,13 @@ a {
     font-size: 10px;
   }
   .works {
-    flex-direction: column; /* Une colonne pour les appareils mobiles */
-    margin-inline: 5%; /* Réduire la marge pour les appareils mobiles si nécessaire */
+    flex-direction: column; 
   }
 
   .works-item {
     width: 80%; /* Largeur plus grande pour les appareils mobiles */
     margin-bottom: 10px; /* Ajouter un espace entre les éléments pour les appareils mobiles */
   }
+  header > .main_title > h1 {
+  font-size: 70px;
 }
