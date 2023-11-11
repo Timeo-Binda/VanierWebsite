@@ -14,9 +14,12 @@ body {
   font-family: lato, sans-serif;
   overflow-x: hidden;
   background-image: url("../medias/photos/bg.jpg");
-
   width: 100%;
   color: #fff;
+}
+
+.content{
+  padding: 10%;
 }
 
 header > .main_title > h1 {
@@ -86,17 +89,25 @@ header > .main_title > h1 {
   font-size: 50px;
   color: #fff;
   font-family: lato, sans-serif;
-  margin: 0; /* Pour supprimer la marge supérieure */
+  margin: 0;
 }
 
 .about {
-  display: flex;
-  justify-content: space-between;
-  margin: 10%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media only screen and (max-width: 600px) {
+  .about {
+    grid-template-columns: 1fr;
+    margin: 5%;
+  }
+  .main_title h1 {
+    font-size: 10px;
+  }
 }
 
 .text_about {
-  flex: 1;
   margin-right: 5%;
   font-size: 18px;
 }
@@ -104,54 +115,69 @@ header > .main_title > h1 {
 h3 {
   font-size: 50px;
   font-weight: bold;
+  margin: 0;
 }
 
 .img_about {
-  max-width: 30%;
+  width: 100%;
   height: auto;
 }
 
-
-.about > .work > .works > .works-item > p{
+.work > .works > .works-item > p {
   font-size: 30px;
 }
 
 .work {
-width: 100%;
+  width: 100%;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
 .works {
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-inline: 10%;
+  /* margin-inline: 10%; */
 }
 
 .works-item {
   display: flex;
   flex-direction: column;
-  margin-right: 5%;
+  width: 20%;
   justify-content: center;
   align-items: center;
-
 }
 
-
-
-
-
-a{
+a {
   color: #fff;
   text-decoration: none;
 }
 
-
-.contact-item{
+.contact-item {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
 }
 
-.contact-item > a{
+.contact-item > a {
   margin-left: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .about {
+    grid-template-columns: 1fr;
+    margin: 5%;
+  }
+  .main_title h1 {
+    font-size: 10px;
+  }
+  .works {
+    flex-direction: column; /* Une colonne pour les appareils mobiles */
+    margin-inline: 5%; /* Réduire la marge pour les appareils mobiles si nécessaire */
+  }
+
+  .works-item {
+    width: 80%; /* Largeur plus grande pour les appareils mobiles */
+    margin-bottom: 10px; /* Ajouter un espace entre les éléments pour les appareils mobiles */
+  }
 }
