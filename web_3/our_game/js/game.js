@@ -30,12 +30,12 @@ playerImage.onload = function () {
     playerReady = true;
 };
 
-// Goodies image
-var goodyReady = false;
-var goodyImage = new Image();
-goodyImage.src = "images/goody.png";
-goodyImage.onload = function () {
-    goodyReady = true;
+// Enemy image
+var enemyReady = false;
+var enemyImage = new Image();
+enemyImage.src = "images/enemy.png";
+enemyImage.onload = function () {
+    enemyReady = true;
 };
 
 // Create global game objects
@@ -44,14 +44,18 @@ var player = {
     width: 32,
     height: 32,
     x: (canvas.width - 32) / 2,
-    y: (canvas.height - 32) / 2
+    y: (canvas.height - 32) / 2,
+    lives: 5
 };
 
-var goodies = [
-    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)) }, // one goody
-    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)) }, // two goodies
-    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)) }  // three goodies
+
+// Create enemies
+var enemies = [
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 }
 ];
+
 
 // View variables
 var viewX = 0;
@@ -78,9 +82,9 @@ addEventListener("keydown", function (e) {
 
 // Set initial state
 var init = function () {
-    for (var i in goodies) {
-        goodies[i].x = (Math.random() * (canvas.width - goodies[i].width));
-        goodies[i].y = (Math.random() * (canvas.height - goodies[i].height));
+    for (var i in enemies) {
+        enemies[i].x = (Math.random() * (canvas.width - enemies[i].width));
+        enemies[i].y = (Math.random() * (canvas.height - enemies[i].height));
     }
 };
 
@@ -113,11 +117,34 @@ var main = function () {
             }
         }
 
-        for (var i in goodies) {
-            if (checkCollision(player, goodies[i])) {
-                goodies.splice(i, 1);
-            }
+
+for (var i in enemies) {
+    var angle = Math.atan2(player.y - enemies[i].y, player.x - enemies[i].x);
+    enemies[i].x += Math.cos(angle) * enemies[i].enemySpeed; // utilisez enemySpeed au lieu de player.speed
+    enemies[i].y += Math.sin(angle) * enemies[i].enemySpeed;
+}
+
+for (var i in enemies) {
+        // Vérifiez la collision et gérez les vies du joueur uniquement si le cooldown de l'ennemi est épuisé
+        if (enemies[i].cooldown === 0 && checkCollision(player, enemies[i])) {
+            // Gérez la collision avec un ennemi ici
+            player.lives--;
+
+            // Réglez le cooldown de l'ennemi à une valeur appropriée (par exemple, 60 frames pour un cooldown d'une seconde)
+            enemies[i].cooldown = 2000;
+
+            // Vous pouvez ajouter d'autres actions ici en fonction de vos besoins
         }
+
+        // Décrémentez le cooldown de l'ennemi
+        if (enemies[i].cooldown > 0) {
+            enemies[i].cooldown--;
+        }
+    
+}
+
+
+
 
         render();
         window.requestAnimationFrame(main);
@@ -139,11 +166,11 @@ var render = function () {
         ctx.drawImage(playerImage, (canvas.width - player.width) / 2, (canvas.height - player.height) / 2, player.width, player.height);
     }
 
-    if (goodyReady) {
-        for (var i in goodies) {
-            ctx.drawImage(goodyImage, goodies[i].x - viewX, goodies[i].y - viewY);
-        }
+if (enemyReady) {
+    for (var i in enemies) {
+        ctx.drawImage(enemyImage, enemies[i].x - viewX, enemies[i].y - viewY);
     }
+}
 
     if (obstacles.length > 0) {
         ctx.fillStyle = "rgb(100, 100, 100)"; // Gris foncé
@@ -152,8 +179,9 @@ var render = function () {
         }
     }
 
-    ctx.fillStyle = "rgb(250, 250, 250)";
-    ctx.fillText("Goodies left: " + goodies.length, 32, 32);
+    ctx.fillStyle = "rgb(0, 0,0)";
+    ctx.fillText("Enemies left: " + enemies.length, 32, 32);
+     ctx.fillText("Lives: " + player.lives, canvas.width - 100, 32);
 };
 
 
@@ -168,7 +196,7 @@ var checkCollision = function (obj1, obj2) {
 };
 
 var checkWin = function () {
-    if (goodies.length > 0) {
+    if (enemies.length > 0) {
         return false;
     } else {
         return true;
