@@ -14,6 +14,10 @@ bgImage.onload = function () {
     bgReady = true;
 };
 
+
+let cX = canvas.width / 2;
+let cY = canvas.height / 2;
+
 // Variables pour suivre la position de la souris
 var mouseX = 0;
 var mouseY = 0;
@@ -69,22 +73,29 @@ var player = {
     height: 64,
     x: (canvas.width - 64) / 2,
     y: (canvas.height - 64) / 2,
-    lives: 5
+    lives: 100
 };
 
 var bullet = {
     speed: 30, // vitesse de la balle en pixels par tick
     width: 32,
     height: 32,
-    x: 0,
-    y: 0,
+    x: player.x + (player.width), // centré par rapport au joueur
+    y: player.y + (player.height - 32) / 2, // centré par rapport au joueur
     visible: false // la balle n'est pas visible au début
 };
 
 
 
+
 // Create enemies
 var enemies = [
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.2, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.8, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.2, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.8, cooldown: 0 },
+    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 },
     { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.2, cooldown: 0 },
     { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.8, cooldown: 0 },
     { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 }
@@ -117,14 +128,19 @@ addEventListener("keydown", function (e) {
             player.x += player.speed;
             break;
     }
+
+    // Ajustez la position du background en fonction du mouvement du joueur
+    viewX = player.x - canvas.width / 2;
+    viewY = player.y - canvas.height / 2;
+
+    // Inversez la direction du fond pour suivre le mouvement du joueur
+    viewX = bgImage.width - canvas.width - viewX;
+    viewY = bgImage.height - canvas.height - viewY;
+
+    // Assurez-vous que la vue ne dépasse pas les bords du background
+    viewX = Math.max(0, Math.min(bgImage.width - canvas.width, viewX));
+    viewY = Math.max(0, Math.min(bgImage.height - canvas.height, viewY));
 }, false);
-
-
-
-
-
-
-
 
 
 // Modifiez le code de tir de la balle
@@ -134,7 +150,7 @@ addEventListener("keydown", function (e) {
         case " ": // Barre d'espace pour tirer
             if (!bullet.visible) {
                 // Si la balle n'est pas déjà visible, la positionner sur le joueur et la rendre visible
-                bullet.x = player.x + (player.width - bullet.width) / 2;
+                bullet.x = player.x ;
                 bullet.y = player.y + (player.height - bullet.height) / 2;
 
                 // Calculez la direction de la souris par rapport au joueur
@@ -206,39 +222,49 @@ var main = function () {
             ctx.drawImage(winImage, (canvas.width - winImage.width) / 2, (canvas.height - winImage.height) / 2);
         }
     } else {
-        viewX = player.x - (canvas.width / 2);
-        viewY = player.y - (canvas.height / 2);
+        // Continuez le reste du code...
+
+        // La vue reste centrée sur le joueur
+        viewX = player.x - canvas.width / 2;
+        viewY = player.y - canvas.height / 2;
+
+        // Assurez-vous que la vue ne dépasse pas les bords du background
+        viewX = Math.max(0, Math.min(bgImage.width - canvas.width, viewX));
+        viewY = Math.max(0, Math.min(bgImage.height - canvas.height, viewY));
+
+        // Dessinez l'arrière-plan (bg) en ajustant sa position en fonction de la vue centrée sur le joueur
+        ctx.drawImage(bgImage, -viewX, -viewY);
 
         // Vérification de collision avec les obstacles
         for (var i in obstacles) {
             if (checkCollision(player, obstacles[i])) {
-                // Collision détectée, réinitialisez la position du joueur ici ou effectuez d'autres actions
-                // Par exemple, pour empêcher le joueur de se déplacer vers le haut s'il touche un obstacle en bas :
+                // Répondez à la collision avec les obstacles ici
+                // Par exemple, ajustez la position du joueur pour éviter l'obstacle
                 if (player.y + player.height >= obstacles[i].y && player.y < obstacles[i].y + obstacles[i].height && player.x + player.width > obstacles[i].x && player.x < obstacles[i].x + obstacles[i].width) {
                     player.y = obstacles[i].y + obstacles[i].height;
                 }
-                // Vous pouvez ajouter d'autres conditions pour gérer les collisions dans d'autres directions.
+                // Ajoutez d'autres conditions au besoin
             }
         }
 
-
-
-
-    for (var i in enemies) {
-        // Vérifiez la collision entre les ennemis et les obstacles
-        for (var j in obstacles) {
-            if (checkCollision(enemies[i], obstacles[j])) {
-                // Si une collision est détectée, ajustez la position de l'ennemi en conséquence
-                // Par exemple, si l'ennemi touche un obstacle, réduisez sa vitesse à 0
-                enemies[i].enemySpeed = 0;
+        for (var i in enemies) {
+            // Vérifiez la collision entre les ennemis et les obstacles
+            for (var j in obstacles) {
+                if (checkCollision(enemies[i], obstacles[j])) {
+                    // Si une collision est détectée, ajustez la position de l'ennemi en conséquence
+                    // Par exemple, si l'ennemi touche un obstacle, réduisez sa vitesse à 0
+                    enemies[i].enemySpeed = 0;
+                }
             }
-        }
 
-        if (enemies[i].enemySpeed !== 0) {
-            var angle = Math.atan2(player.y - enemies[i].y, player.x - enemies[i].x);
-            enemies[i].x += Math.cos(angle) * enemies[i].enemySpeed;
-            enemies[i].y += Math.sin(angle) * enemies[i].enemySpeed;
-        }
+            // Si la vitesse de l'ennemi n'est pas 0, déplacez l'ennemi vers le joueur
+            if (enemies[i].enemySpeed !== 0) {
+                // Calculez l'angle entre l'ennemi et le joueur
+                var angle = Math.atan2(player.y - (enemies[i].y + viewY), player.x - (enemies[i].x + viewX));
+                // Déplacez l'ennemi en fonction de sa vitesse et de l'angle
+                enemies[i].x += Math.cos(angle) * enemies[i].enemySpeed;
+                enemies[i].y += Math.sin(angle) * enemies[i].enemySpeed;
+            }
         
         // Vérifiez la collision et gérez les vies du joueur uniquement si le cooldown de l'ennemi est épuisé
         if (enemies[i].cooldown === 0 && checkCollision(player, enemies[i])) {
@@ -282,17 +308,18 @@ if (player.lives <= 0) {
 var render = function () {
     if (bgReady) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        // Ajustez la position de l'arrière-plan (bg) en fonction de la position du joueur
+        // Dessinez l'arrière-plan (bg) en ajustant sa position en fonction de la vue centrée sur le joueur
         ctx.drawImage(bgImage, -viewX, -viewY);
     }
 
     if (playerReady) {
-        ctx.drawImage(playerImage, (canvas.width - player.width) / 2, (canvas.height - player.height) / 2, player.width, player.height);
+        // Dessinez le joueur au centre de l'écran
+        ctx.drawImage(playerImage, cX - player.width / 2, cY - player.height / 2, player.width, player.height);
     }
 
 if (enemyReady) {
     for (var i in enemies) {
-        ctx.drawImage(enemyImage, enemies[i].x - viewX, enemies[i].y - viewY);
+        ctx.drawImage(enemyImage, enemies[i].x -viewX, enemies[i].y - viewY);
     }
 }
     if (bulletReady && bullet.visible) {
