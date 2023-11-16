@@ -72,32 +72,59 @@ var speed = 3;
 var vX = 0;
 var vY = 0;
 
+// Utilisez un objet pour suivre l'état des touches
+var keysPressed = {};
+
 // Handle keyboard controls
 addEventListener("keydown", function (e) {
-	//Keystrokes
-	if (e.key == "z") { // UP
-		vX = 0;
-		vY = -speed;
-	}
-	if (e.key == "s") { // DOWN
-		vX = 0;
-		vY = speed;
-	}
-	if (e.key == "q") { // LEFT
-		vX = -speed;
-		vY = 0;
-	}
-	if (e.key == "d") { // RIGHT
-		vX = speed;
-		vY = 0;
-	}
+    // Enregistrez la touche actuellement enfoncée dans l'objet keysPressed
+    keysPressed[e.key] = true;
 
+    // Mettez à jour la direction en fonction des touches enfoncées
+    updateDirection();
 }, false);
 
 addEventListener("keyup", function (e) {
-	vX = 0;
-	vY = 0;
+    // Supprimez la touche relâchée de l'objet keysPressed
+    delete keysPressed[e.key];
+
+    // Mettez à jour la direction en fonction des touches enfoncées
+    updateDirection();
 });
+
+// Fonction pour mettre à jour la direction en fonction des touches enfoncées
+function updateDirection() {
+    // Réinitialisez la direction
+    vX = 0;
+    vY = 0;
+
+    // Vérifiez les touches enfoncées et ajoutez les vecteurs de déplacement en conséquence
+    if (keysPressed["z"]) {
+        vY -= speed;
+    }
+    if (keysPressed["s"]) {
+        vY += speed;
+    }
+    if (keysPressed["q"]) {
+        vX -= speed;
+    }
+    if (keysPressed["d"]) {
+        vX += speed;
+    }
+
+    // Normalisez le vecteur de déplacement pour maintenir la même vitesse en diagonale
+    var length = Math.sqrt(vX * vX + vY * vY);
+    if (length !== 0) {
+        vX /= length;
+        vY /= length;
+    }
+
+    // Multipliez par la vitesse pour obtenir le vecteur final
+    vX *= speed;
+    vY *= speed;
+}
+
+
 
 
 
@@ -157,7 +184,7 @@ var main = function () {
 		}
 		else {
 			stage.x += vX;
-			vX = -vX;
+			vX = 0;
 			
 		}
 		if (stage.y < cY - player.height/2 && stage.y > cY-stage.height + player.height/2) {
@@ -165,7 +192,7 @@ var main = function () {
 		}
 		else {
 			stage.y += vY;
-			vY = -vY;
+			vY = 0;
 		}
 
         // Bouger les ennemis vers le joueur
