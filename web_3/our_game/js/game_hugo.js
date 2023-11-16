@@ -47,6 +47,9 @@ var Enemies = [ // this is an array
 	{ width: 32, height: 32 }
 ];
 
+//enemy speed
+var enemySpeed = 1;
+
 //Canvas centre
 let cX = canvas.width / 2;
 let cY = canvas.height / 2;
@@ -97,6 +100,28 @@ addEventListener("keyup", function (e) {
 });
 
 
+
+var moveEnemiesTowardsPlayer = function () {
+    for (var i in Enemies) {
+        // Calculer la direction vers le joueur
+        var directionX = player.x - Enemies[i].x;
+        var directionY = player.y - Enemies[i].y;
+
+        // Normaliser la direction (la ramener à une longueur de 1)
+        var length = Math.sqrt(directionX * directionX + directionY * directionY);
+        directionX /= length;
+        directionY /= length;
+
+        // Déplacer l'ennemi dans la direction du joueur avec une vitesse constante
+        Enemies[i].x += directionX * enemySpeed;
+        Enemies[i].y += directionY * enemySpeed;
+    }
+};
+
+
+
+
+
 //Set initial state
 var init = function () {
 	//Put the player in the centre
@@ -142,6 +167,9 @@ var main = function () {
 			stage.y += vY;
 			vY = -vY;
 		}
+
+        // Bouger les ennemis vers le joueur
+        moveEnemiesTowardsPlayer();
 
 		//check collisions
 		for (var i in Enemies) {
