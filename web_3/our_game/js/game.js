@@ -96,9 +96,6 @@ var enemies = [
     { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.2, cooldown: 0 },
     { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.8, cooldown: 0 },
     { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 },
-    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.2, cooldown: 0 },
-    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.8, cooldown: 0 },
-    { width: 32, height: 32, x: (Math.random() * (canvas.width - 32)), y: (Math.random() * (canvas.height - 32)), enemySpeed: 0.5, cooldown: 0 }
 ];
 
 var gameOver = function () {
