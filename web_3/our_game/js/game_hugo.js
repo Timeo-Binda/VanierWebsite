@@ -35,10 +35,19 @@ EnemyImage.onload = function () {
 	EnemyReady = true; 
 };
 
+// Tree image
+var TreeReady = false;
+var TreeImage = new Image(); 
+TreeImage.src = "images/tree.png"; 
+TreeImage.onload = function () {
+	TreeReady = true; 
+};
+
+
 // Create global game objects 
 var player = {
-	width: 32,
-	height: 32
+	width: 64,
+	height: 64
 };
 
 var Enemies = [ // this is an array
@@ -49,6 +58,12 @@ var Enemies = [ // this is an array
 
 //enemy speed
 var enemySpeed = 1;
+
+var Trees = [ // this is an array
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 }
+];
 
 //Canvas centre
 let cX = canvas.width / 2;
@@ -161,6 +176,15 @@ var init = function () {
 		Enemies[i].y = (Math.random() * 
 			(stage.height - Enemies[i].height));
 	}
+    //Place Trees at random locations within the STAGE, not the canvas
+    for (var i in Trees) {
+        Trees[i].x = (Math.random() *
+            (stage.width - Trees[i].width));
+        Trees[i].y = (Math.random() *
+            (stage.height - Trees[i].height));
+    }
+
+
 };
 
 
@@ -209,6 +233,20 @@ var main = function () {
 				Enemies.splice(i,1);
 			}
 		}
+
+        //check collisions  with Trees
+        for (var i in Trees) {
+
+            //move Trees with stage
+            Trees[i].x -= vX;
+            Trees[i].y -= vY;
+
+            if (checkCollision(player,Trees[i])) {
+                vX = 0;
+                vY = 0;
+            }
+        }
+
 		render();
 		window.requestAnimationFrame(main);
 	}
@@ -229,6 +267,11 @@ var render = function () {
 			ctx.drawImage(EnemyImage, Enemies[i].x, Enemies[i].y);
 		}
 	}
+    if (TreeReady) {
+        for (var i in Trees) {
+            ctx.drawImage(TreeImage, Trees[i].x, Trees[i].y);
+        }
+    }
 
 	//Label
 	ctx.fillStyle = "rgb(250, 250, 250)";
@@ -248,7 +291,7 @@ var checkCollision = function (obj1,obj2) {
 
 //Check if we have won
 var checkWin = function () {
-	if (Enemies.length > 0) { 
+	if (Enemies.length > -1) { 
 		return false;
 	} else { 
 		return true;

@@ -219,7 +219,6 @@ var main = function () {
             ctx.drawImage(winImage, (canvas.width - winImage.width) / 2, (canvas.height - winImage.height) / 2);
         }
     } else {
-        // Continuez le reste du code...
 
         // La vue reste centrée sur le joueur
         viewX = player.x - canvas.width / 2;
