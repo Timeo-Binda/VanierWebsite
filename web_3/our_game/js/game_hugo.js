@@ -69,6 +69,28 @@ var Trees = [ // this is an array
 let cX = canvas.width / 2;
 let cY = canvas.height / 2;
 
+
+// Bullet image
+var bulletReady = false;
+var bulletImage = new Image();
+bulletImage.src = "images/bullet.png";
+bulletImage.onload = function () {
+    bulletReady = true;
+};
+
+
+
+var bullet = {
+    x: cX, // Initial position (center of canvas)
+    y: cY,
+    speed: 5, // Bullet speed
+    visible: false, // Bullet starts invisible
+    distanceTraveled: 0 // Track the distance traveled
+};
+
+
+
+
 //Background is an object, 
 //we'll use it to frame the game, let's call it stage
 //we start at the top left corner: 0,0
@@ -114,18 +136,22 @@ function updateDirection() {
     vY = 0;
 
     // Vérifiez les touches enfoncées et ajoutez les vecteurs de déplacement en conséquence
-    if (keysPressed["z"]) {
-        vY -= speed;
-    }
-    if (keysPressed["s"]) {
-        vY += speed;
-    }
-    if (keysPressed["q"]) {
-        vX -= speed;
-    }
-    if (keysPressed["d"]) {
-        vX += speed;
-    }
+for (var i in Trees) {
+        if (!checkCollision(player, Trees[i])) {
+			if (keysPressed["z"]) {
+				vY -= speed;
+			}
+			if (keysPressed["s"]) {
+				vY += speed;
+			}
+			if (keysPressed["q"]) {
+				vX -= speed;
+			}
+			if (keysPressed["d"]) {
+				vX += speed;
+			}
+	}
+}
 
     // Normalisez le vecteur de déplacement pour maintenir la même vitesse en diagonale
     var length = Math.sqrt(vX * vX + vY * vY);
@@ -138,6 +164,36 @@ function updateDirection() {
     vX *= speed;
     vY *= speed;
 }
+
+
+// Handle mouse click
+canvas.addEventListener("mousedown", function (event) {
+    if (event.button === 0) { // Left mouse button
+        // Set bullet position to the center
+        bullet.x = cX;
+        bullet.y = cY;
+
+        // Set bullet visibility to true
+        bullet.visible = true;
+
+        // Calculate the direction vector
+        var directionX = event.clientX - cX;
+        var directionY = event.clientY - cY;
+
+        // Normalize the direction vector
+        var length = Math.sqrt(directionX * directionX + directionY * directionY);
+        directionX /= length;
+        directionY /= length;
+
+        // Update bullet velocity based on direction
+        bullet.vX = directionX * bullet.speed;
+        bullet.vY = directionY * bullet.speed;
+
+        // Reset distance traveled
+        bullet.distanceTraveled = 0;
+    }
+});
+
 
 
 
@@ -203,19 +259,21 @@ var main = function () {
 		//Not yet won, play game
 		
 		//move stage
+		console.log("stage.x: "+stage.x);
 		if (stage.x < cX - player.width/2 && stage.x > cX-stage.width + player.width/2) {
 			stage.x -= vX;
 		}
 		else {
-			stage.x += vX;
+			stage.x += vX*6;
 			vX = 0;
+
 			
 		}
 		if (stage.y < cY - player.height/2 && stage.y > cY-stage.height + player.height/2) {
 			stage.y -= vY;
 		}
 		else {
-			stage.y += vY;
+			stage.y += vY*6;
 			vY = 0;
 		}
 
@@ -247,6 +305,22 @@ var main = function () {
             }
         }
 
+
+
+
+    // Move bullet if visible
+    if (bullet.visible) {
+        bullet.x += bullet.vX;
+        bullet.y += bullet.vY;
+        bullet.distanceTraveled += bullet.speed;
+
+        // Check if the bullet has traveled 300px
+        if (bullet.distanceTraveled >= 300) {
+            // Reset bullet visibility
+            bullet.visible = false;
+        }
+    }
+
 		render();
 		window.requestAnimationFrame(main);
 	}
@@ -255,7 +329,7 @@ var main = function () {
 // Draw everything
 var render = function () {
 	if (bgReady) {
-		ctx.fillStyle = "magenta";
+		ctx.fillStyle = "blue";
 		ctx.fillRect(0,0,canvas.width,canvas.height);
 		ctx.drawImage(bgImage, stage.x, stage.y);
 	}
@@ -272,6 +346,9 @@ var render = function () {
             ctx.drawImage(TreeImage, Trees[i].x, Trees[i].y);
         }
     }
+	if (bulletReady && bullet.visible) {
+    ctx.drawImage(bulletImage, bullet.x, bullet.y);
+}
 
 	//Label
 	ctx.fillStyle = "rgb(250, 250, 250)";
