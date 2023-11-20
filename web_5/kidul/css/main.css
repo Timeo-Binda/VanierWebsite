@@ -1,0 +1,28 @@
+@import url("header.css");
+@import url("footer.css");
+@import url("grid.css");
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+    /* background-color: #060A11;
+  color: #fff; */
+}
+
+
+.main_content{
+  margin: 5%;
+  margin-inline: 10%;
+}
+
+h2{
+    font-size: 2.5em;
+} 

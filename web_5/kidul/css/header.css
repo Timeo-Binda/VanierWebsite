@@ -1,0 +1,130 @@
+header {
+  background-color: #060A11; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    padding-inline: 1%;
+    z-index: 10;
+}
+
+.logo img {
+    width: 20%;
+  z-index: 10;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+
+}
+
+.menu-toggle {
+  cursor: pointer;
+  display: none;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 5px 0;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+.nav-list li {
+  margin: 0 15px;
+}
+
+.nav-list a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 600px) {
+  .menu-toggle {
+    display: block;
+
+  }
+
+  .nav-list {
+    padding-inline:5%;
+    z-index: 10;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; 
+    left: 0;
+    width: 100%;
+    background-color: #060A11;
+  }
+
+  .nav-list.show {
+    display: flex;
+  }
+
+  .nav-list li {
+    margin: 10px 0;
+  }
+}
+
+
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* Ratio 16:9 (9 / 16 * 100%) */
+
+  @media only screen and (max-width: 600px) {
+    padding-bottom: 70vh; /* Hauteur de 70vh pour mobile */
+  }
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+  z-index: 1; /* Assure que le titre et la flèche sont au-dessus de la vidéo */
+}
+
+.overlay h1 {
+  font-size: 8em;
+  margin-bottom: 20px;
+}
+
+.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 30px solid #fff;
+  display: inline-block;
+  background-color: tomato;
+}
+
+
+
