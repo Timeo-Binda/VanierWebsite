@@ -50,6 +50,11 @@ header {
   font-weight: 300;
 }
 
+.nav-list a:hover {
+  border-bottom: 2px solid #fff;
+  transition: border-bottom 0.5s ease-in; 
+}
+
 @media only screen and (max-width: 600px) {
   .menu-toggle {
     display: block;
