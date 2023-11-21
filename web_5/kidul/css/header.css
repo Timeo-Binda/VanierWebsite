@@ -104,6 +104,10 @@ header {
   width: 100%;
   height: calc(100vh - 50px);
   object-fit: cover;
+    filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+  -webkit-transition: all 0.6s ease; /* Fade to color for Chrome and Safari */
+  -webkit-backface-visibility: hidden; /* Fix for transition flickering */
 }
 
 .overlay {
@@ -133,3 +137,8 @@ header {
 
 
 
+@media only screen and (max-width: 600px) {
+  .overlay h1 {
+    font-size: 4em;
+  }
+}

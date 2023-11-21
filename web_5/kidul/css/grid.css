@@ -49,3 +49,48 @@ one_column_element > img {
   height: auto;
   margin: 0 auto;
 }
+
+.card_prog {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.card_prog > img {
+  width: 100%;
+  object-fit: cover;
+  aspect-ratio: 16/9;
+  margin: 0 auto;
+  filter: gray; /* IE6-9 */
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+  -webkit-transition: all 0.6s ease; /* Fade to color for Chrome and Safari */
+  -webkit-backface-visibility: hidden; /* Fix for transition flickering */
+}
+
+.card_prog > img:hover {
+  filter: none;
+}
+
+.card_prog > div > h3 {
+  font-size: 2.5em;
+  border-bottom: 1px solid black;
+}
+
+.card_prog > div > p {
+  font-size: 1.7em;
+}
+
+.two_column_element > div > h3 {
+  margin-bottom: 5%;
+}
+
+
+@media screen and (max-width: 768px) {
+  .card_prog > div > h3 {
+    font-size: 1.5em;
+  }
+  .card_prog > div > p {
+    font-size: 1.2em;
+  }
+}
