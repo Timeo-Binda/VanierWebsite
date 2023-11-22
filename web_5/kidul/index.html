@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" x-data="{menuIsOpen: false}" :class="menuIsOpen && 'noScroll'">
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,40 +8,47 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="shortcut icon" type="image/jpg" href="medias/svg/logo_kidul_black.svg" />
     <script src="js/header.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.3/dist/cdn.min.js"></script>
+<script src="js/text_flick.js"></script>
 </head>
 
 <body>
     <header>
-        <div class="logo">
-            <img src="medias/svg/logo_kidul_white.svg" alt="Logo">
-        </div>
-        <nav class="navbar">
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+        <a href="/index.html"><img src="medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
+        <button @click="menuIsOpen = ! menuIsOpen" class="menu_btn">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+        </button>
+        <nav :class="menuIsOpen && 'menu_open'" class="menu">
+            <div>
+                <a href="/index.html"><img src="medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
+                <button @click="menuIsOpen = ! menuIsOpen" class="menu_btn">
+                    <span class="close"></span>
+                    <span class="close"></span>
+                </button>
             </div>
-            <ul class="nav-list">
+            <ul>
                 <li><a href="#">Accueil</a></li>
-                <li><a href="#">Programation</a></li>
-                <li><a href="#">Kibul</a></li>
+                <li><a href="pages/programmation.html">Programmation</a></li>
+                <li><a href="pages/kibul.html">Kibul</a></li>
             </ul>
         </nav>
     </header>
     <main>
         <div class="video-container">
-            <video class="bg-video" autoplay muted loop id="myVideo">
+            <video class="bg-video-v" autoplay muted loop id="myVideo">
+                <source
+                    src="https://res.cloudinary.com/df4q1dlw6/video/upload/v1700620368/videos/mwfvplhmlbbaq2mdxcvv.mp4"
+                    type="video/mp4">
+            </video>
+            <video class="bg-video-h" autoplay muted loop id="myVideo">
                 <source
                     src="https://res.cloudinary.com/df4q1dlw6/video/upload/v1700429428/videos/czpj82gzyowfurwkwcrv.mp4"
                     type="video/mp4">
             </video>
-            <div class="overlay">
-                <h1>KIDUL</h1>
-                <svg width="29" height="15" viewBox="0 0 29 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M27.4166 1L14.4999 13.5L1.58325 1" stroke="white" stroke-width="2" stroke-miterlimit="10"
-                        stroke-linecap="round" />
-                </svg>
-            </div>
+
+            
         </div>
         <div class="main_content">
             <div class="two_column_element">
@@ -75,7 +82,7 @@
                         électriseront la scène, créant des
                         moments musicaux qui résonneront longtemps après les dernières notes."
                 </div>
-                <img src="https://placehold.co/200x300" alt="affiche prochain concert">
+                <img src="https://placehold.co/210x297" alt="affiche prochain concert">
             </div>
             <div class="one_column_element">
                 <h2>
@@ -123,21 +130,21 @@
             </div>
 
 
-             <div class="two_column_element">
-              <div >
+            <div class="two_column_element">
+                <div>
                     <video controls class="video">
                         <source
                             src="https://res.cloudinary.com/df4q1dlw6/video/upload/v1700445706/videos/ybmfni8x4wqp13fobjrp.mp4"
                             type="video/mp4">
                     </video>
                 </div>
-                 <div >
+                <div>
                     <video controls class="video">
                         <source
                             src="https://res.cloudinary.com/df4q1dlw6/video/upload/v1700445779/videos/ijvc7np1etlmitbl84ss.mp4"
                             type="video/mp4">
                     </video>
-                </div> 
+                </div>
 
             </div>
 
@@ -152,12 +159,15 @@
                         à 8 semaines avec 2 groupes par soirée.
 
                 </div>
-                
+
+
+        </div>
+
 
         </div>
 
 
-        </div>
+
 
 
     </main>

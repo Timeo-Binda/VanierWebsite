@@ -1,6 +1,7 @@
 @import url("header.css");
 @import url("footer.css");
 @import url("grid.css");
+@import url("menu.css");
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -17,12 +18,20 @@ body {
   color: #fff; */
 }
 
+.noScroll {
+  overflow: hidden;
+}
 
 .main_content{
-  margin: 5%;
   margin-inline: 10%;
 }
 
 h2{
     font-size: 2.5em;
 } 
+
+
+a{
+  text-decoration: none;
+
+}

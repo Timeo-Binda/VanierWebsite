@@ -85,6 +85,11 @@ one_column_element > img {
   margin-bottom: 5%;
 }
 
+.two_column_element a {
+  color: black;
+  
+}
+
 
 @media screen and (max-width: 768px) {
   .card_prog > div > h3 {
@@ -93,4 +98,7 @@ one_column_element > img {
   .card_prog > div > p {
     font-size: 1.2em;
   }
+  .card_prog > img {
+    filter: none; 
+}
 }
