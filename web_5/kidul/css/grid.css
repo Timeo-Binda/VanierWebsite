@@ -17,7 +17,7 @@
 }
 
 .two_column_element > .text > p {
-  font-size: 1.1em;
+  font-size: 1.25em;
   margin-top: 5%;
 }
 
@@ -74,7 +74,7 @@ one_column_element > img {
 
 .card_prog > div > h3 {
   font-size: 2.5em;
-  border-bottom: 1px solid black;
+  
 }
 
 .card_prog > div > p {
@@ -101,4 +101,12 @@ one_column_element > img {
   .card_prog > img {
     filter: none; 
 }
+.two_column_element > .text > p {
+  font-size: 2em;
+  margin-top: 5%;
+}
+.two_column_element > img {
+  width: 100%;
+}
+
 }
