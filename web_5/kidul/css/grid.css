@@ -7,7 +7,7 @@
 }
 
 .two_column_element > img {
-  width: 80%;
+  width: 100%;
   height: auto;
   margin: 0 auto;
 }
@@ -163,6 +163,12 @@ font-size: 0.7em;
     width: 100%;
     height: auto;
     margin: 0 auto;
+  }
+  .two_column_element {
+    padding-top: 20%;
+  }
+  .two_column_element > div {
+    font-size: 0.8em;
   }
 }
 
