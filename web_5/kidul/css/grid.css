@@ -85,7 +85,8 @@ one_column_element > img {
 }
 
 .two_column_element a {
-  color: #03b6fc;
+  text-decoration: underline;
+  color: black;
 }
 
 
