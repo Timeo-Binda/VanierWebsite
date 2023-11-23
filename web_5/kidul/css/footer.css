@@ -1,7 +1,8 @@
 footer {
   background-color: #060A11;
   color: #fff;
-  padding: 20px;
+  padding: 2%;
+  padding-inline: 10%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -25,7 +26,9 @@ footer {
 }
 
 .footer-column p {
+  
   margin: 8px 0;
+  font-size: 1em;
   padding-bottom: 2%;
 }
 

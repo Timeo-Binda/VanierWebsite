@@ -133,12 +133,18 @@ one_column_element > img {
 .three_column_element > .text > p {
   font-size: 1.25em;
   margin-top: 5%;
+  padding-right: 5%;
 }
 
 .three_column_element > .text > p > span{
   font-style: italic;
-  font-size: 0.85em;
+
 }
+
+.three_column_element > .text > .bottom{
+font-size: 0.7em;
+}
+
 
 @media screen and (max-width: 768px) {
   .three_column_element {
@@ -151,6 +157,7 @@ one_column_element > img {
   .three_column_element > .text > p {
     margin-top: 2%;
     font-size: 1.5em;
+    padding-right: 0%;
   }
   .three_column_element > .img > img {
     width: 100%;
