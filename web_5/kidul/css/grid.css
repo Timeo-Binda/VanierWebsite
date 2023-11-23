@@ -164,9 +164,6 @@ font-size: 0.7em;
     height: auto;
     margin: 0 auto;
   }
-  .two_column_element {
-    padding-top: 20%;
-  }
   .two_column_element > div {
     font-size: 0.8em;
   }

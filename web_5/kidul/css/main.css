@@ -21,7 +21,7 @@ body {
   overflow: hidden;
 }
 
-.main_content {
+.main_content, .main_content_home {
   margin-inline: 10%;
 }
 
@@ -41,6 +41,8 @@ p{
   font-size: 1.2em;
 }
 
+
+
 @media screen and (max-width: 768px) {
   .footer_desktop {
     display: none;
@@ -59,8 +61,8 @@ p{
   h3 {
     font-size: 1.5em;
   }
+  .main_content {
+  padding-top: 25%;
+}
 }
 
-.main_content {
-  padding-top: 8%;
-}
