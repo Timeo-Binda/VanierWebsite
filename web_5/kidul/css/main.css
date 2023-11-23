@@ -49,7 +49,22 @@ a{
   display: block;
 }
 
+  p{
+    font-size: 1.5em;
+  }
+  figcaption{
+    font-size: 1.5em;
+    margin-top: 1em;
+  }
+  h3{
+    font-size: 1.5em;
+  }
 }
 
+
+
+.main_content{
+  padding-top: 8%;
+}
 
 

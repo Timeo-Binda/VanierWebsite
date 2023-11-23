@@ -13,21 +13,79 @@
 </head>
 
 <body>
-    <div class="three_column_element">
-        <img src="../medias/photos/kibul/kibul_png.png" alt="">
-        <div class="text">
-            <h2>La Kibul</h2>
-            <p>Avec l'aide de la taverne du lion, une brasserie locale de Delle, Kidul à crée une bière, la Kibul !
-            </p>
+
+    <header>
+        <a href="/index.html"><img src="../medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
+        <button @click="menuIsOpen = ! menuIsOpen" class="menu_btn">
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+            <span class="hamburger"></span>
+        </button>
+        <nav :class="menuIsOpen && 'menu_open'" class="menu">
+            <div>
+                <a href="/index.html"><img src="../medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
+                <button @click="menuIsOpen = ! menuIsOpen" class="menu_btn">
+                    <span class="close"></span>
+                    <span class="close"></span>
+                </button>
+            </div>
+            <ul>
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="programmation.html">Programmation</a></li>
+                <li><a href="#">Kibul</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <main>
+        <div class="three_column_element">
+            <div class="img">
+                <img src="../medias/photos/kibul/kibul_png.png" alt="">
+            </div>
+            <div class="text">
+                <h2>Kibul !!!!</h2>
+                <p>Avec l'aide de la taverne du lion, une brasserie locale de Delle, Kidul à crée une bière, la Kibul !
+                </p>
+                <p>
+                    "Dans cette période mouvementée, suite à la crise sanitaire qui a touché de plein fouet la culture,
+                    les membres de
+                    l’asso Kidul, amateurs de musique et de bières, décident avec leur ami Vincent de proposer à la
+                    reprise des concerts une
+                    bière blonde et savoureuse avec beaucoup de bulles !
+
+                </p>
+                <p>
+                    L’idée a tout de suite séduit et leur 1 er brassin a été élaboré mi-septembre 2021.
+                    Aujourd’hui, nous sommes fiers de pouvoir vous la faire goûter !"
+                </p>
+            </div>
+            <div class="text">
+                <h2>La Taverne du Lion</h2>
+                <p>
+                    <span >« Nous sommes au début des années 2010, les bières industrielles sont encore reines mais la
+                    résistance s’organise. Dans
+                    cette ébullition d’irréductibles brasseurs souhaitant retrouver les vrais goûts de malt et de
+                    houblon, nous avons
+                    commencé à brasser nos propres bières. 10 ans plus tard, c’est pour partager cette passion que nous
+                    avons décidé de
+                    créer notre micro brasserie. L’objectif est de fournir des produits authentiques, de qualité et de
+                    proximité. »</span>
+
+                </p>
+            </div>
+
         </div>
 
+    <div class="gallery">
+        <img src="../medias/photos/kibul/P1040084.JPG" alt=""><img src="../medias/photos/kibul/P1040165.JPG" alt=""><img
+            src="../medias/photos/kibul/P1040191.JPG" alt=""><img src="../medias/photos/kibul/P1040200.JPG" alt="">
     </div>
 
 
 
 
-
-
+    </main>
 
 
     <div class="footer_desktop">
@@ -142,40 +200,40 @@
         <div class="footer_beer">
             <div class="footer-column">
                 <h3>Suivez-nous</h3>
-                <figure>
+                <div>
                     <a href="https://www.facebook.com/AssociationKidul/" class="social-link" target="_blank">
                         <img src="../medias/svg/facebook.svg" alt="Facebook">
-                        <figcaption>Facebook</figcaption>
+                        <p>Facebook</p>
                     </a>
-                </figure>
-                <figure>
+                </div>
+                <div>
                     <a href="https://www.instagram.com/asso_kidul" class="social-link" target="_blank">
                         <img src="../medias/svg/insta.svg" alt="Instagram">
-                        <figcaption>Instagram</figcaption>
+                        <p>Instagram</p>
                     </a>
-                </figure>
+                </div>
             </div>
             <div class="footer-column">
                 <h3>Contactez-nous</h3>
-                <figure>
+                <div>
                     <a href="https://www.google.com/maps/place/16+Rue+Saint-Nicolas,+90100+Delle,+France/@47.5081046,6.9976028,17z/data=!3m1!4b1!4m6!3m5!1s0x47921e53a7cb2a6f:0x61716dab50fc5ebf!8m2!3d47.5081011!4d7.0024737!16s%2Fg%2F11fkkl85nq?entry=ttu"
                         class="contact-link" target="_blank">
                         <img src="../medias/svg/location-marker.svg" alt="Adresse">
-                        <figcaption>16 rue St Nicolas, 90100 Delle</figcaption>
+                        <p>16 rue St Nicolas, 90100 Delle</p>
                     </a>
-                </figure>
-                <figure>
+                </div>
+                <div>
                     <a href="mailto:asso.kidul@gmail.com" class="contact-link">
                         <img src="../medias/svg/mail-open.svg" alt="Email">
-                        <figcaption>asso.kidul@gmail.com</figcaption>
+                        <p>asso.kidul@gmail.com</p>
                     </a>
-                </figure>
-                <figure>
+                </div>
+                <div>
                     <a href="tel:+33783814951" class="contact-link">
                         <img src="../medias/svg/phone.svg" alt="Téléphone">
-                        <figcaption>+33 7 83 81 49 51</figcaption>
+                        <p>+33 7 83 81 49 51</p>
                     </a>
-                </figure>
+                </div>
             </div>
             <div class="footer-column">
                 <h3>Mentions Légales</h3>
@@ -193,40 +251,40 @@
         <footer>
             <div class="footer-column">
                 <h3>Suivez-nous</h3>
-                <figure>
+                <div>
                     <a href="https://www.facebook.com/AssociationKidul/" class="social-link" target="_blank">
                         <img src="../medias/svg/facebook.svg" alt="Facebook">
-                        <figcaption>Facebook</figcaption>
+                        <p>Facebook</p>
                     </a>
-                </figure>
-                <figure>
+                </div>
+                <div>
                     <a href="https://www.instagram.com/asso_kidul" class="social-link" target="_blank">
                         <img src="../medias/svg/insta.svg" alt="Instagram">
-                        <figcaption>Instagram</figcaption>
+                        <p>Instagram</p>
                     </a>
-                </figure>
+                </div>
             </div>
             <div class="footer-column">
                 <h3>Contactez-nous</h3>
-                <figure>
+                <div>
                     <a href="https://www.google.com/maps/place/16+Rue+Saint-Nicolas,+90100+Delle,+France/@47.5081046,6.9976028,17z/data=!3m1!4b1!4m6!3m5!1s0x47921e53a7cb2a6f:0x61716dab50fc5ebf!8m2!3d47.5081011!4d7.0024737!16s%2Fg%2F11fkkl85nq?entry=ttu"
                         class="contact-link" target="_blank">
                         <img src="../medias/svg/location-marker.svg" alt="Adresse">
-                        <figcaption>16 rue St Nicolas, 90100 Delle</figcaption>
+                        <p>16 rue St Nicolas, 90100 Delle</p>
                     </a>
-                </figure>
-                <figure>
+                </div>
+                <div>
                     <a href="mailto:asso.kidul@gmail.com" class="contact-link">
                         <img src="../medias/svg/mail-open.svg" alt="Email">
-                        <figcaption>asso.kidul@gmail.com</figcaption>
+                        <p>asso.kidul@gmail.com</p>
                     </a>
-                </figure>
-                <figure>
+                </div>
+                <div>
                     <a href="tel:+33783814951" class="contact-link">
                         <img src="../medias/svg/phone.svg" alt="Téléphone">
-                        <figcaption>+33 7 83 81 49 51</figcaption>
+                        <p>+33 7 83 81 49 51</p>
                     </a>
-                </figure>
+                </div>
             </div>
             <div class="footer-column">
                 <h3>Mentions Légales</h3>
