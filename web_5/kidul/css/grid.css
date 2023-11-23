@@ -110,3 +110,18 @@ one_column_element > img {
 }
 
 }
+
+
+.three_column_element {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  margin-bottom: 5%;
+  width: 100%;
+}
+
+.three_column_element > img {
+height: 90vh;
+ width: auto;
+  margin: 0 auto;
+}

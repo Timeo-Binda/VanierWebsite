@@ -2,6 +2,7 @@
 @import url("footer.css");
 @import url("grid.css");
 @import url("menu.css");
+@import url("beer_footer.css");
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -14,8 +15,8 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-    /* background-color: #060A11;
-  color: #fff; */
+    background-color: #060A11;
+  color: #fff;
 }
 
 .noScroll {
