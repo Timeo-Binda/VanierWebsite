@@ -17,7 +17,6 @@
 }
 
 .two_column_element > .text > p {
-  font-size: 1.25em;
   margin-top: 5%;
 }
 
@@ -101,7 +100,6 @@ one_column_element > img {
     filter: none; 
 }
 .two_column_element > .text > p {
-  font-size: 2em;
   margin-top: 5%;
 }
 .two_column_element > img {

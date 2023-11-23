@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" x-data="{menuIsOpen: false}" :class="menuIsOpen && 'noScroll'">
 
 <head>
     <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 
 <body>
         <header>
-            <a href="/index.html"><img src="../medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
+            <a href="../index.html"><img src="../medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
             <button @click="menuIsOpen = ! menuIsOpen" class="menu_btn">
                 <span class="hamburger"></span>
                 <span class="hamburger"></span>
@@ -20,7 +20,7 @@
             </button>
             <nav :class="menuIsOpen && 'menu_open'" class="menu">
                 <div>
-                    <a href="/index.html"><img src="../medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
+                    <a href="../index.html"><img src="../medias/svg/logo_kidul_white.svg" alt="LOGO KIDUL" /></a>
                     <button @click="menuIsOpen = ! menuIsOpen" class="menu_btn">
                         <span class="close"></span>
                         <span class="close"></span>

@@ -4,18 +4,16 @@
 @import url("menu.css");
 @import url("beer_footer.css");
 
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap");
 
 * {
   margin: 0;
   padding: 0;
-
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-    background-color: #060A11;
+  font-family: "Montserrat", sans-serif;
+  background-color: #060a11;
   color: #fff;
 }
 
@@ -23,48 +21,46 @@ body {
   overflow: hidden;
 }
 
-.main_content{
+.main_content {
   margin-inline: 10%;
 }
 
-h2{
-    font-size: 2.5em;
-} 
+h2 {
+  font-size: 2.5em;
+}
 
-
-a{
+a {
   text-decoration: none;
 }
 
-.footer_mobile{
+.footer_mobile {
   display: none;
 }
 
+p{
+  font-size: 1.2em;
+}
 
 @media screen and (max-width: 768px) {
-.footer_desktop{
-  display: none;
-}
-.footer_mobile{
-  display: block;
-}
+  .footer_desktop {
+    display: none;
+  }
+  .footer_mobile {
+    display: block;
+  }
 
-  p{
+  p {
     font-size: 1.5em;
   }
-  figcaption{
+  figcaption {
     font-size: 1.5em;
     margin-top: 1em;
   }
-  h3{
+  h3 {
     font-size: 1.5em;
   }
 }
 
-
-
-.main_content{
+.main_content {
   padding-top: 8%;
 }
-
-

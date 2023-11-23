@@ -85,7 +85,7 @@
 
 
   nav > ul > li > a {
-    padding: 2rem;
+    padding-inline: 2rem;
     font-size: 20px;
     color: white;
   }
