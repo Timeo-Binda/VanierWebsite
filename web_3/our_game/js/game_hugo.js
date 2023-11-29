@@ -47,19 +47,28 @@ TreeImage.onload = function () {
 // Create global game objects 
 var player = {
 	width: 64,
-	height: 64
+	height: 64,
+	lives: 5,
 };
 
 var Enemies = [ // this is an array
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 }
+	{ width: 32, height: 32, cooldown: 0 },
+	{ width: 32, height: 32, cooldown: 0 },
+	{ width: 32, height: 32, cooldown: 0 }
 ];
 
 //enemy speed
 var enemySpeed = 1;
 
 var Trees = [ // this is an array
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
+	{ width: 32, height: 32 },
 	{ width: 32, height: 32 },
 	{ width: 32, height: 32 },
 	{ width: 32, height: 32 }
@@ -81,12 +90,20 @@ bulletImage.onload = function () {
 
 
 var bullet = {
+	width: 32,
+	height: 32,
     x: cX, // Initial position (center of canvas)
     y: cY,
     speed: 5, // Bullet speed
     visible: false, // Bullet starts invisible
-    distanceTraveled: 0 // Track the distance traveled
+    distanceTraveled: 0, // Track the distance traveled
+	rotation: 0
 };
+
+
+var elapsedTime = 0;
+
+var elapsedTimeInSeconds = 0;
 
 
 
@@ -166,31 +183,45 @@ for (var i in Trees) {
 }
 
 
+var bulletCooldown = 1500; // 1,5 secondes en millisecondes
+var lastBulletTime = 0;
+
 // Handle mouse click
 canvas.addEventListener("mousedown", function (event) {
     if (event.button === 0) { // Left mouse button
-        // Set bullet position to the center
-        bullet.x = cX;
-        bullet.y = cY;
+        var currentTime = new Date().getTime();
 
-        // Set bullet visibility to true
-        bullet.visible = true;
+        // Vérifiez le cooldown du tir
+        if (currentTime - lastBulletTime > bulletCooldown) {
+            // Set bullet position to the center
+            bullet.x = cX;
+            bullet.y = cY;
 
-        // Calculate the direction vector
-        var directionX = event.clientX - cX;
-        var directionY = event.clientY - cY;
+            // Set bullet visibility to true
+            bullet.visible = true;
 
-        // Normalize the direction vector
-        var length = Math.sqrt(directionX * directionX + directionY * directionY);
-        directionX /= length;
-        directionY /= length;
+            // Calculate the direction vector
+            var directionX = event.clientX - cX;
+            var directionY = event.clientY - cY;
 
-        // Update bullet velocity based on direction
-        bullet.vX = directionX * bullet.speed;
-        bullet.vY = directionY * bullet.speed;
+            // Normalize the direction vector
+            var length = Math.sqrt(directionX * directionX + directionY * directionY);
+            directionX /= length;
+            directionY /= length;
 
-        // Reset distance traveled
-        bullet.distanceTraveled = 0;
+            // Update bullet velocity based on direction
+            bullet.vX = directionX * bullet.speed;
+            bullet.vY = directionY * bullet.speed;
+
+            // Update bullet rotation based on direction
+            bullet.rotation = Math.atan2(directionY, directionX);
+
+            // Reset distance traveled
+            bullet.distanceTraveled = 0;
+
+            // Mettez à jour le temps du dernier tir
+            lastBulletTime = currentTime;
+        }
     }
 });
 
@@ -218,6 +249,43 @@ var moveEnemiesTowardsPlayer = function () {
 
 
 
+var waveDelay = 5000; // Délai initial entre les vagues en millisecondes
+
+var startNewWave = function () {
+    console.log("Starting new wave...");
+
+    // Ajoutez un nouvel ennemi
+    Enemies.push({
+        width: 32,
+        height: 32,
+        cooldown: 0,
+        x: Math.random() * (stage.width - 32),
+        y: Math.random() * (stage.height - 32)
+    });
+
+    // Augmentez le délai avant de lancer la prochaine vague (ajustez le délai selon vos préférences)
+    var nextWaveDelay = 5000;  // Délai initial avant la prochaine vague (5 secondes)
+    setTimeout(startNewWave, nextWaveDelay);
+
+    // Augmentez le délai pour la prochaine vague
+    nextWaveDelay += 2000;  // Augmentation du délai par exemple de 2 secondes
+};
+
+// Ajoutez ces variables pour la barre de progression
+var progressBarWidth = 200;
+var progressBarHeight = 20;
+var progressBarX = 32;
+var progressBarY = 96;
+var progressBarColor = "green";
+var progressBarBgColor = "gray";
+
+
+
+
+
+
+
+
 
 
 //Set initial state
@@ -239,6 +307,7 @@ var init = function () {
         Trees[i].y = (Math.random() *
             (stage.height - Trees[i].height));
     }
+	startNewWave();
 
 
 };
@@ -246,53 +315,18 @@ var init = function () {
 
 // The main game loop
 var main = function () {
-	if (checkWin()) {
-		//WIN display win frame
-		if (winReady) {
-			//ctx.drawImage(winImage, 0, 0);
-			ctx.drawImage(winImage, 
-				(canvas.width-winImage.width)/2, 
-				(canvas.height-winImage.height)/2);
-		}
-	}
-	else {
-		//Not yet won, play game
-		
-		//move stage
-		console.log("stage.x: "+stage.x);
-		if (stage.x < cX - player.width/2 && stage.x > cX-stage.width + player.width/2) {
-			stage.x -= vX;
-		}
-		else {
-			stage.x += vX*6;
-			vX = 0;
+	elapsedTime += 16;
 
-			
-		}
-		if (stage.y < cY - player.height/2 && stage.y > cY-stage.height + player.height/2) {
-			stage.y -= vY;
-		}
-		else {
-			stage.y += vY*6;
-			vY = 0;
-		}
+	    if (player.lives <= 0) {
+        // Arrêtez le jeu car la vie du joueur est à zéro
+        console.log("Game over!");
+		 console.log("Bien joué ! Votre score est de " + (elapsedTime / 1000) + " secondes");
+		 alert("Bien joué ! Votre score est de " + (elapsedTime / 1000) + " secondes");
+        return;
+    }
 
-        // Bouger les ennemis vers le joueur
-        moveEnemiesTowardsPlayer();
+	else{
 
-		//check collisions
-		for (var i in Enemies) {
-		
-			//move Enemies with stage
-			Enemies[i].x -= vX;
-			Enemies[i].y -= vY;
-		
-			if (checkCollision(player,Enemies[i])) {
-				Enemies.splice(i,1);
-			}
-		}
-
-        //check collisions  with Trees
         for (var i in Trees) {
 
             //move Trees with stage
@@ -304,9 +338,8 @@ var main = function () {
                 vY = 0;
             }
         }
-
-
-
+		
+		
 
     // Move bullet if visible
     if (bullet.visible) {
@@ -320,11 +353,80 @@ var main = function () {
             bullet.visible = false;
         }
     }
+	
+		//check collisions
+for (var i = Enemies.length - 1; i >= 0; i--) {
+    // Check if the enemy is defined and has a cooldown property
+    if (Enemies[i] && typeof Enemies[i].cooldown !== 'undefined') {
+        // move Enemies with stage
+        Enemies[i].x -= vX;
+        Enemies[i].y -= vY;
 
+        if (bullet.visible) {
+            if (checkCollision(bullet, Enemies[i])) {
+                Enemies.splice(i, 1);
+                bullet.visible = false;
+                continue; // Skip the rest of the loop for this iteration
+            }
+        }
+
+        // Check if the enemy has a cooldown property
+        if (Enemies[i].cooldown === 0 && checkCollision(player, Enemies[i])) {
+            // Handle collision with an enemy here
+            player.lives--;
+
+            // Set the cooldown of the enemy to an appropriate value (e.g., 60 frames for a one-second cooldown)
+            Enemies[i].cooldown = 2000;
+
+            // You can add other actions here based on your needs
+        }
+
+        if (Enemies[i].cooldown > 0) {
+            Enemies[i].cooldown--;
+        }
+    } else {
+        // Log an error or take appropriate action if Enemies[i] is undefined or lacks the cooldown property
+        console.error("Invalid enemy or missing cooldown property:", Enemies[i]);
+    }
+}
+
+//move stage
+		console.log("stage.x: "+stage.x);
+		if (stage.x < cX - player.width/2 && stage.x > cX-stage.width + player.width/2) {
+			stage.x -= vX;
+		}
+		else {
+			stage.x += vX*6;
+			vX = 0;
+			for (var i in Trees) {
+                Trees[i].x -= vX*6;
+                Trees[i].y -= 0;
+				console.log("Trees[i].y: "+Trees[i].y);
+            }
+		}
+		if (stage.y < cY - player.height/2 && stage.y > cY-stage.height + player.height/2) {
+			stage.y -= vY;
+		}
+		else {
+			stage.y += vY*6;
+			vY = 0;
+			for (var i in Trees) {
+                Trees[i].x += vY*6;
+                Trees[i].y -= 0;
+            }
+			
+		}
+
+        // Bouger les ennemis vers le joueur
+        moveEnemiesTowardsPlayer();
 		render();
 		window.requestAnimationFrame(main);
-	}
-};
+	};
+}
+
+ elapsedTimeInSeconds = Math.floor(elapsedTime / 1000);
+
+var newWaveStarted = false;  
 
 // Draw everything
 var render = function () {
@@ -346,13 +448,32 @@ var render = function () {
             ctx.drawImage(TreeImage, Trees[i].x, Trees[i].y);
         }
     }
-	if (bulletReady && bullet.visible) {
-    ctx.drawImage(bulletImage, bullet.x, bullet.y);
-}
+    if (bulletReady && bullet.visible) {
+        ctx.drawImage(bulletImage, bullet.x, bullet.y);
+    }
+
+
+// Calculer la progression de la balle
+    var currentTime = new Date().getTime();
+    var timeSinceLastBullet = currentTime - lastBulletTime;
+    var progress = Math.min(1, timeSinceLastBullet / bulletCooldown);
+
+    // Dessiner la barre de progression
+    // Dessiner d'abord le rectangle de fond
+    ctx.fillStyle = progressBarBgColor;
+    ctx.fillRect(progressBarX, progressBarY, progressBarWidth, progressBarHeight);
+
+    // Puis dessiner la barre de progression
+    ctx.fillStyle = progressBarColor;
+    ctx.fillRect(progressBarX, progressBarY, progressBarWidth * progress, progressBarHeight);
+
 
 	//Label
+	 ctx.font = "24px Arial"
 	ctx.fillStyle = "rgb(250, 250, 250)";
 	ctx.fillText("Enemies left: "+Enemies.length, 32, 32);
+	 ctx.fillText("Lives: " + player.lives, 32, 64);
+	 ctx.fillText("Temps écoulé: " + elapsedTimeInSeconds + " secondes", canvas.width - 200, 32);
 };
 
 //Generic function to check for collisions 
@@ -368,11 +489,7 @@ var checkCollision = function (obj1,obj2) {
 
 //Check if we have won
 var checkWin = function () {
-	if (Enemies.length > -1) { 
-		return false;
-	} else { 
-		return true;
-	}
+return Enemies.length === 0;
 };
 
 //Start the gameplay

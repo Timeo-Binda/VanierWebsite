@@ -73,7 +73,7 @@ var player = {
     height: 64,
     x: (canvas.width - 64) / 2,
     y: (canvas.height - 64) / 2,
-    lives: 100
+    lives: 5
 };
 
 var bullet = {
