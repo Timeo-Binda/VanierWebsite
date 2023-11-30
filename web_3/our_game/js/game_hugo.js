@@ -20,6 +20,9 @@ winImage.src = "images/win.png";
 winImage.onload = function () {
 	winReady = true; 
 };
+
+var score = 0;
+
 // Player image
 var playerReady = false;
 var playerImage = new Image(); 
@@ -27,13 +30,28 @@ playerImage.src = "images/player.png";
 playerImage.onload = function () {
 	playerReady = true; 
 };
-// Enemies image
-var EnemyReady = false;
-var EnemyImage = new Image(); 
-EnemyImage.src = "images/Enemy.png"; 
-EnemyImage.onload = function () {
-	EnemyReady = true; 
+
+
+var ZombieReady = false;
+var ZombieImage = new Image();
+ZombieImage.src = "images/Zombie.png";
+ZombieImage.onload = function () {
+    ZombieReady = true;
 };
+
+var GiantReady = false;
+var GiantImage = new Image();
+GiantImage.src = "images/giant.png";  // Assurez-vous d'avoir le bon chemin d'accès à votre image
+GiantImage.onload = function () {
+    GiantReady = true;
+};
+
+var Giants = [
+    { width: 64, height: 64, cooldown: 0, health: 2 },
+    { width: 64, height: 64, cooldown: 0, health: 2 },
+    { width: 64, height: 64, cooldown: 0, health: 2 }
+];
+
 
 // Tree image
 var TreeReady = false;
@@ -51,10 +69,10 @@ var player = {
 	lives: 5,
 };
 
-var Enemies = [ // this is an array
-	{ width: 32, height: 32, cooldown: 0 },
-	{ width: 32, height: 32, cooldown: 0 },
-	{ width: 32, height: 32, cooldown: 0 }
+var Zombies = [
+    { width: 32, height: 32, cooldown: 0 },
+    { width: 32, height: 32, cooldown: 0 },
+    { width: 32, height: 32, cooldown: 0 }
 ];
 
 //enemy speed
@@ -227,23 +245,38 @@ canvas.addEventListener("mousedown", function (event) {
 
 
 
-
-
-
-var moveEnemiesTowardsPlayer = function () {
-    for (var i in Enemies) {
+var moveGiantsTowardsPlayer = function () {
+    for (var i in Giants) {
         // Calculer la direction vers le joueur
-        var directionX = player.x - Enemies[i].x;
-        var directionY = player.y - Enemies[i].y;
+        var directionX = player.x - Giants[i].x;
+        var directionY = player.y - Giants[i].y;
 
         // Normaliser la direction (la ramener à une longueur de 1)
         var length = Math.sqrt(directionX * directionX + directionY * directionY);
         directionX /= length;
         directionY /= length;
 
-        // Déplacer l'ennemi dans la direction du joueur avec une vitesse constante
-        Enemies[i].x += directionX * enemySpeed;
-        Enemies[i].y += directionY * enemySpeed;
+        // Déplacer le géant dans la direction du joueur avec une vitesse constante
+        Giants[i].x += directionX * (enemySpeed / 2);  // Moitié de la vitesse des zombies
+        Giants[i].y += directionY * (enemySpeed / 2);
+    }
+};
+
+
+var moveZombiesTowardsPlayer = function () {
+    for (var i in Zombies) {
+        // Calculate direction towards the player
+        var directionX = player.x - Zombies[i].x;
+        var directionY = player.y - Zombies[i].y;
+
+        // Normalize the direction
+        var length = Math.sqrt(directionX * directionX + directionY * directionY);
+        directionX /= length;
+        directionY /= length;
+
+        // Move the zombie towards the player with a constant speed
+        Zombies[i].x += directionX * enemySpeed;
+        Zombies[i].y += directionY * enemySpeed;
     }
 };
 
@@ -255,7 +288,7 @@ var startNewWave = function () {
     console.log("Starting new wave...");
 
     // Ajoutez un nouvel ennemi
-    Enemies.push({
+    Zombies.push({
         width: 32,
         height: 32,
         cooldown: 0,
@@ -263,12 +296,21 @@ var startNewWave = function () {
         y: Math.random() * (stage.height - 32)
     });
 
+    Giants.push({
+        width: 64,
+        height: 64,
+        cooldown: 0,
+        health: 2,
+        x: Math.random() * (stage.width - 64),
+        y: Math.random() * (stage.height - 64)
+    });
+
     // Augmentez le délai avant de lancer la prochaine vague (ajustez le délai selon vos préférences)
-    var nextWaveDelay = 5000;  // Délai initial avant la prochaine vague (5 secondes)
+    var nextWaveDelay = 10000;  // Délai initial avant la prochaine vague (5 secondes)
     setTimeout(startNewWave, nextWaveDelay);
 
     // Augmentez le délai pour la prochaine vague
-    nextWaveDelay += 2000;  // Augmentation du délai par exemple de 2 secondes
+    nextWaveDelay -= 100;  // Augmentation du délai par exemple de 2 secondes
 };
 
 // Ajoutez ces variables pour la barre de progression
@@ -294,12 +336,20 @@ var init = function () {
 	player.x = cX - (player.width / 2); 
 	player.y = cY - (player.height / 2);
 	//Place Enemies at random locations within the STAGE, not the canvas
-	for (var i in Enemies) {
-		Enemies[i].x = (Math.random() * 
-			(stage.width - Enemies[i].width));
-		Enemies[i].y = (Math.random() * 
-			(stage.height - Enemies[i].height));
+	for (var i in Zombies) {
+		Zombies[i].x = (Math.random() * 
+			(stage.width - Zombies[i].width));
+		Zombies[i].y = (Math.random() * 
+			(stage.height - Zombies[i].height));
 	}
+
+    	for (var i in Giants) {
+		Giants[i].x = (Math.random() * 
+			(stage.width - Giants[i].width));
+		Giants[i].y = (Math.random() * 
+			(stage.height - Giants[i].height));
+	}
+
     //Place Trees at random locations within the STAGE, not the canvas
     for (var i in Trees) {
         Trees[i].x = (Math.random() *
@@ -320,8 +370,8 @@ var main = function () {
 	    if (player.lives <= 0) {
         // Arrêtez le jeu car la vie du joueur est à zéro
         console.log("Game over!");
-		 console.log("Bien joué ! Votre score est de " + (elapsedTime / 1000) + " secondes");
-		 alert("Bien joué ! Votre score est de " + (elapsedTime / 1000) + " secondes");
+		 
+		 alert("Bien joué ! Votre score est de " + (score) + " Points");
         return;
     }
 
@@ -355,40 +405,82 @@ var main = function () {
     }
 	
 		//check collisions
-for (var i = Enemies.length - 1; i >= 0; i--) {
-    // Check if the enemy is defined and has a cooldown property
-    if (Enemies[i] && typeof Enemies[i].cooldown !== 'undefined') {
-        // move Enemies with stage
-        Enemies[i].x -= vX;
-        Enemies[i].y -= vY;
+// Update references to enemies with zombies in the collision check loop
+for (var i = Zombies.length - 1; i >= 0; i--) {
+    // Check if the zombie is defined and has a cooldown property
+    if (Zombies[i] && typeof Zombies[i].cooldown !== 'undefined') {
+        // Move zombies with stage
+        Zombies[i].x -= vX;
+        Zombies[i].y -= vY;
 
         if (bullet.visible) {
-            if (checkCollision(bullet, Enemies[i])) {
-                Enemies.splice(i, 1);
+            if (checkCollision(bullet, Zombies[i])) {
+                Zombies.splice(i, 1);
                 bullet.visible = false;
+                score += 1;
                 continue; // Skip the rest of the loop for this iteration
             }
         }
 
-        // Check if the enemy has a cooldown property
-        if (Enemies[i].cooldown === 0 && checkCollision(player, Enemies[i])) {
-            // Handle collision with an enemy here
+        // Check if the zombie has a cooldown property
+        if (Zombies[i].cooldown === 0 && checkCollision(player, Zombies[i])) {
+            // Handle collision with a zombie here
             player.lives--;
 
-            // Set the cooldown of the enemy to an appropriate value (e.g., 60 frames for a one-second cooldown)
-            Enemies[i].cooldown = 2000;
+            // Set the cooldown of the zombie to an appropriate value (e.g., 60 frames for a one-second cooldown)
+            Zombies[i].cooldown = 2000;
 
             // You can add other actions here based on your needs
         }
 
-        if (Enemies[i].cooldown > 0) {
-            Enemies[i].cooldown--;
+        if (Zombies[i].cooldown > 0) {
+            Zombies[i].cooldown--;
         }
     } else {
-        // Log an error or take appropriate action if Enemies[i] is undefined or lacks the cooldown property
-        console.error("Invalid enemy or missing cooldown property:", Enemies[i]);
+        // Log an error or take appropriate action if Zombies[i] is undefined or lacks the cooldown property
+        console.error("Invalid zombie or missing cooldown property:", Zombies[i]);
     }
-}
+};
+
+
+for (var i = Giants.length - 1; i >= 0; i--) {
+    // Check if the zombie is defined and has a cooldown property
+    if (Giants[i] && typeof Giants[i].cooldown !== 'undefined') {
+        // Move Giants with stage
+        Giants[i].x -= vX;
+        Giants[i].y -= vY;
+
+        if (bullet.visible) {
+        if (checkCollision(bullet, Giants[i])) {
+            Giants[i].health--;  // Réduire la santé du géant
+            if (Giants[i].health <= 0) {
+                Giants.splice(i, 1);
+                score += 5;  // Supprimer le géant s'il n'a plus de santé
+            }
+            bullet.visible = false;
+            continue;
+        }
+    }
+
+        // Check if the zombie has a cooldown property
+        if (Giants[i].cooldown === 0 && checkCollision(player, Giants[i])) {
+            // Handle collision with a zombie here
+            player.lives--;
+
+            // Set the cooldown of the zombie to an appropriate value (e.g., 60 frames for a one-second cooldown)
+            Giants[i].cooldown = 4000;
+
+            // You can add other actions here based on your needs
+        }
+
+        if (Giants[i].cooldown > 0) {
+            Giants[i].cooldown--;
+        }
+    } else {
+        // Log an error or take appropriate action if Zombies[i] is undefined or lacks the cooldown property
+        console.error("Invalid zombie or missing cooldown property:", Zombies[i]);
+    }
+};
 
 //move stage
 		console.log("stage.x: "+stage.x);
@@ -418,7 +510,8 @@ for (var i = Enemies.length - 1; i >= 0; i--) {
 		}
 
         // Bouger les ennemis vers le joueur
-        moveEnemiesTowardsPlayer();
+        moveZombiesTowardsPlayer();
+        moveGiantsTowardsPlayer();
 		render();
 		window.requestAnimationFrame(main);
 	};
@@ -438,11 +531,17 @@ var render = function () {
 	if (playerReady) {
 		ctx.drawImage(playerImage, player.x, player.y);
 	}
-	if (EnemyReady) {
-		for (var i in Enemies) {
-			ctx.drawImage(EnemyImage, Enemies[i].x, Enemies[i].y);
-		}
-	}
+if (ZombieReady) {
+    for (var i in Zombies) {
+        ctx.drawImage(ZombieImage, Zombies[i].x, Zombies[i].y);
+    }
+}
+if (GiantReady) {
+    for (var i in Giants) {
+        ctx.drawImage(GiantImage, Giants[i].x, Giants[i].y);
+    }
+}
+
     if (TreeReady) {
         for (var i in Trees) {
             ctx.drawImage(TreeImage, Trees[i].x, Trees[i].y);
@@ -471,9 +570,10 @@ var render = function () {
 	//Label
 	 ctx.font = "24px Arial"
 	ctx.fillStyle = "rgb(250, 250, 250)";
-	ctx.fillText("Enemies left: "+Enemies.length, 32, 32);
+	ctx.fillText("Enemies left: "+Zombies.length, 32, 32);
 	 ctx.fillText("Lives: " + player.lives, 32, 64);
-	 ctx.fillText("Temps écoulé: " + elapsedTimeInSeconds + " secondes", canvas.width - 200, 32);
+	 ctx.fillText("Score: " + score, 32, 96);
+
 };
 
 //Generic function to check for collisions 
