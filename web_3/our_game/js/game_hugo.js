@@ -59,13 +59,23 @@ var generateRandomPosition = function () {
 
     // Vérifiez la distance par rapport au joueur
     var distance = Math.sqrt(Math.pow(player.x - x, 2) + Math.pow(player.y - y, 2));
-    if (distance < 200) { // Ajustez la distance selon vos préférences
-        // Si trop proche, générez une nouvelle position de manière récursive
+
+    // Vérifiez si les coordonnées sont à l'intérieur de la zone de jeu
+    if (x < stage.x || x > stage.x + stage.width || y < stage.y || y > stage.y + stage.height) {
+        // Si en dehors de la zone de jeu, générez une nouvelle position de manière récursive
         return generateRandomPosition();
     }
 
+    // Vérifiez si la distance par rapport au joueur est suffisamment grande
+    if (distance < 200) { // Ajustez la distance selon vos préférences
+        // Si trop proche du joueur, générez une nouvelle position de manière récursive
+        return generateRandomPosition();
+    }
+
+    // Si les coordonnées et la distance sont valides, retournez-les
     return { x: x, y: y };
 };
+
 
 // Tree image
 var TreeReady = false;
@@ -80,7 +90,7 @@ TreeImage.onload = function () {
 var player = {
 	width: 64,
 	height: 64,
-	lives: 5,
+	lives: 1,
 };
 
 var Zombies = [
@@ -93,17 +103,17 @@ var Zombies = [
 var enemySpeed = 1;
 
 var Trees = [ // this is an array
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 },
-	{ width: 32, height: 32 }
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 },
+	{ width: 47, height: 142 }
 ];
 
 //Canvas centre
@@ -137,7 +147,16 @@ var elapsedTime = 0;
 
 var elapsedTimeInSeconds = 0;
 
-
+CanvasRenderingContext2D.prototype.roundRect = function (x, y, width, height, radius) {
+    this.beginPath();
+    this.moveTo(x + radius, y);
+    this.arcTo(x + width, y, x + width, y + height, radius);
+    this.arcTo(x + width, y + height, x, y + height, radius);
+    this.arcTo(x, y + height, x, y, radius);
+    this.arcTo(x, y, x + width, y, radius);
+    this.closePath();
+    return this;
+};
 
 
 //Background is an object, 
@@ -296,7 +315,10 @@ var moveZombiesTowardsPlayer = function () {
 
 
 
-var waveDelay = 5000; // Délai initial entre les vagues en millisecondes
+
+var nextWaveDelay = 10000;  // Délai initial avant la prochaine vague (10 secondes)
+
+var waveCounter = 0; // Initialize the wave counter
 
 var startNewWave = function () {
     console.log("Starting new wave...");
@@ -306,26 +328,50 @@ var startNewWave = function () {
         width: 32,
         height: 32,
         cooldown: 0,
-        x: Math.random() * (stage.width - 32),
-        y: Math.random() * (stage.height - 32)
+        x: 0,
+        y: 0  // Les positions seront définies plus loin dans le code
     });
 
-    Giants.push({
-        width: 64,
-        height: 64,
-        cooldown: 0,
-        health: 2,
-        x: Math.random() * (stage.width - 64),
-        y: Math.random() * (stage.height - 64)
-    });
+    // Increment the wave counter
+    waveCounter++;
+
+    // Check if the current wave is a multiple of 3
+    if (waveCounter % 3 === 0) {
+        Giants.push({
+            width: 64,
+            height: 64,
+            cooldown: 0,
+            health: 2,
+            x: 0,
+            y: 0  // Les positions seront définies plus loin dans le code
+        });
+    }
+
+    // Définissez les positions avec la fonction generateRandomPosition
+    var zombiePosition = generateRandomPosition();
+    Zombies[Zombies.length - 1].x = zombiePosition.x;
+    Zombies[Zombies.length - 1].y = zombiePosition.y;
+
+    // Add a Giant only once every three waves
+    if (waveCounter % 3 === 0) {
+        var giantPosition = generateRandomPosition();
+        Giants[Giants.length - 1].x = giantPosition.x;
+        Giants[Giants.length - 1].y = giantPosition.y;
+    }
 
     // Augmentez le délai avant de lancer la prochaine vague (ajustez le délai selon vos préférences)
-    var nextWaveDelay = 10000;  // Délai initial avant la prochaine vague (5 secondes)
-    setTimeout(startNewWave, nextWaveDelay);
+    nextWaveDelay -= 100;  // Diminution du délai pour augmenter la difficulté
 
     // Augmentez le délai pour la prochaine vague
-    nextWaveDelay -= 100;  // Augmentation du délai par exemple de 2 secondes
+    setTimeout(startNewWave, nextWaveDelay);
 };
+
+// Call the startNewWave function for the first time
+startNewWave();
+
+
+
+
 
 // Ajoutez ces variables pour la barre de progression
 var progressBarWidth = 200;
@@ -381,9 +427,8 @@ var main = function () {
 
 	    if (player.lives <= 0) {
         // Arrêtez le jeu car la vie du joueur est à zéro
-        console.log("Game over!");
-		 
-		 alert("Bien joué ! Votre score est de " + (score) + " Points");
+        localStorage.setItem("scoregame", score);
+        window.location.href = "game_over.html";
         return;
     }
 
@@ -554,11 +599,15 @@ if (GiantReady) {
     }
 }
 
-    if (TreeReady) {
-        for (var i in Trees) {
-            ctx.drawImage(TreeImage, Trees[i].x, Trees[i].y);
-        }
+if (TreeReady) {
+    for (var i in Trees) {
+        // Calculate the adjusted positions for the trees
+        var treeX = Trees[i].x - Trees[i].width / 2;
+        var treeY = Trees[i].y;
+        ctx.drawImage(TreeImage, treeX, treeY);
     }
+}
+
     if (bulletReady && bullet.visible) {
         ctx.drawImage(bulletImage, bullet.x, bullet.y);
     }
@@ -572,19 +621,20 @@ if (GiantReady) {
     // Dessiner la barre de progression
     // Dessiner d'abord le rectangle de fond
     ctx.fillStyle = progressBarBgColor;
-    ctx.fillRect(progressBarX, progressBarY, progressBarWidth, progressBarHeight);
+ctx.roundRect(progressBarX, progressBarY, progressBarWidth, progressBarHeight, 10).fill();
+
 
     // Puis dessiner la barre de progression
     ctx.fillStyle = progressBarColor;
-    ctx.fillRect(progressBarX, progressBarY, progressBarWidth * progress, progressBarHeight);
+ctx.roundRect(progressBarX, progressBarY, progressBarWidth * progress, progressBarHeight, 10).fill();
 
 
 	//Label
 	 ctx.font = "24px Arial"
-	ctx.fillStyle = "rgb(250, 250, 250)";
-	ctx.fillText("Enemies left: "+Zombies.length, 32, 32);
+	ctx.fillStyle = "rgb(0, 0, 0)";
+	//ctx.fillText("Enemies left: "+Zombies.length, 32, 32);
 	 ctx.fillText("Lives: " + player.lives, 32, 64);
-	 ctx.fillText("Score: " + score, 32, 96);
+	 ctx.fillText("Score: " + score, 32, 32);
 
 };
 

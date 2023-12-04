@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game over</title>
+    <script src="pocketbase.umd.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+                const score = localStorage.getItem('scoregame') || 0;
+                document.getElementById('scoreValue').value = score;
+                document.getElementById('scoreDisplay').textContent = 'Score: ' + score;
+            });
+    </script>
+    <script>
+                const pb = new PocketBase('http://127.0.0.1:8090');
+                    async function submitScore() {
+                        const name = document.getElementById('playerName').value;
+                        const score = document.getElementById('scoreValue').value;
+                        const data = {
+                            pseudo: name,
+                            score: score
+                        };
+                        try {
+                            const record = await pb.collection('Score_saucisson').create(data);
+                            console.log(record);
+                        } catch (error) {
+                            console.error('Erreur lors de l\'envoi du score:', error);
+                        }
+                    }
+    </script>
+</head>
+<body>
+    <h1>Game over</h1>
+    <div id="scoreDisplay"></div>
+            <div class="text-center">
+                <input type="text" id="playerName" placeholder="Votre nom" />
+                <input type="hidden" id="scoreValue" />
+                <button class="text-center" onclick="submitScore()">Enregistrer le score</button>
+            </div>
+</body>
+</html>

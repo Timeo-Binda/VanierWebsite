@@ -1,11 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap');
+
 #gameBox {
     overflow: hidden; /* Cela masquera tout ce qui dépasse du gameBox */
     position: relative; /* Assurez-vous que le gameBox est positionné correctement */
 }
 
-canvas {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+
+
+body {
+    font-family: 'Pixelify Sans', sans-serif;
 }
