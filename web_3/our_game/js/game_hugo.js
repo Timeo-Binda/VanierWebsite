@@ -47,9 +47,9 @@ GiantImage.onload = function () {
 };
 
 var Giants = [
-    { width: 64, height: 64, cooldown: 0, health: 2 },
-    { width: 64, height: 64, cooldown: 0, health: 2 },
-    { width: 64, height: 64, cooldown: 0, health: 2 }
+    { width: 128, height: 128, cooldown: 0, health: 2 },
+    { width: 128, height: 128, cooldown: 0, health: 2 },
+    { width: 128, height: 128, cooldown: 0, health: 2 }
 ];
 
 
@@ -70,9 +70,9 @@ var player = {
 };
 
 var Zombies = [
-    { width: 32, height: 32, cooldown: 0 },
-    { width: 32, height: 32, cooldown: 0 },
-    { width: 32, height: 32, cooldown: 0 }
+    { width: 64, height: 64, cooldown: 0 },
+    { width: 64, height: 64, cooldown: 0 },
+    { width: 64, height: 64, cooldown: 0 }
 ];
 
 //enemy speed
