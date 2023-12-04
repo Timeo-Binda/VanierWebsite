@@ -53,6 +53,20 @@ var Giants = [
 ];
 
 
+var generateRandomPosition = function () {
+    var x = Math.random() * stage.width;
+    var y = Math.random() * stage.height;
+
+    // Vérifiez la distance par rapport au joueur
+    var distance = Math.sqrt(Math.pow(player.x - x, 2) + Math.pow(player.y - y, 2));
+    if (distance < 200) { // Ajustez la distance selon vos préférences
+        // Si trop proche, générez une nouvelle position de manière récursive
+        return generateRandomPosition();
+    }
+
+    return { x: x, y: y };
+};
+
 // Tree image
 var TreeReady = false;
 var TreeImage = new Image(); 
@@ -336,19 +350,17 @@ var init = function () {
 	player.x = cX - (player.width / 2); 
 	player.y = cY - (player.height / 2);
 	//Place Enemies at random locations within the STAGE, not the canvas
-	for (var i in Zombies) {
-		Zombies[i].x = (Math.random() * 
-			(stage.width - Zombies[i].width));
-		Zombies[i].y = (Math.random() * 
-			(stage.height - Zombies[i].height));
-	}
+    for (var i in Zombies) {
+        var position = generateRandomPosition();
+        Zombies[i].x = position.x;
+        Zombies[i].y = position.y;
+    }
 
-    	for (var i in Giants) {
-		Giants[i].x = (Math.random() * 
-			(stage.width - Giants[i].width));
-		Giants[i].y = (Math.random() * 
-			(stage.height - Giants[i].height));
-	}
+    for (var i in Giants) {
+        var position = generateRandomPosition();
+        Giants[i].x = position.x;
+        Giants[i].y = position.y;
+    }
 
     //Place Trees at random locations within the STAGE, not the canvas
     for (var i in Trees) {
